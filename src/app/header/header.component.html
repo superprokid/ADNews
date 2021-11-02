@@ -1,0 +1,297 @@
+
+<ng-template #content let-modal>
+  <nav ngbNav #nav="ngbNav" class="nav-tabs">
+    <ng-container ngbNavItem>
+      <a ngbNavLink class="d-flex justify-content-center" style="width: 50%; font-size: 20px;">Đăng nhập</a>
+      <ng-template ngbNavContent >
+        <div class="row">
+          <div class="col-md-7 mx-my-0 loginfrm">
+            <div class="d-flex justify-content-center">
+              Đăng nhập với tài khoản
+            </div>
+            <div class="input-group form-group">
+              <input type="text" class="form-control" placeholder="Tài khoản">     
+            </div>
+            <div class="input-group form-group">
+              <input [type]="show ? 'text' : 'password'" class="form-control" placeholder="Mật khẩu">
+              <div class="input-group-prepend">
+                <button class="input-group-text" (click)="password()"><i class="fas fa-user"></i></button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <input type="submit" value="Đăng nhập" class="btn float-right login_btn">
+            </div>
+            <div class="d-flex justify-content-center">
+              <a href="#" style="padding-bottom:10px">Lấy lại mật khẩu</a>
+            </div>
+          </div>
+        <div class="col-md-4 mx-my-0">
+          <div class="d-flex justify-content-center">
+            Đăng nhập với
+          </div>
+          <div class="d-flex justify-content-center social_icon">
+            <span><i class="fab fa-facebook-square"></i></span>
+            <span><i class="fab fa-google-plus-square"></i></span>
+            <span><i class="fab fa-twitter-square"></i></span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+    <ng-container ngbNavItem>
+      <a ngbNavLink class="d-flex justify-content-center" style="width: 50%; font-size: 20px;">Đăng kí tài khoản</a>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="col-md-7 mx-my-0 loginfrm">
+            <div class="d-flex justify-content-center">
+              Tạo tài khoản ADNews
+            </div>
+            <div class="d-flex justify-content-center">
+              Để sử dụng đầy đủ tính năng đọc báo
+            </div>
+            <div class="d-flex justify-content-center">
+              Và tham gia cộng đồng
+            </div>
+            <div class="input-group form-group">
+              <input type="text" class="form-control" placeholder="Tài khoản">     
+            </div>
+            <div class="input-group form-group">
+              <input [type]="show ? 'text' : 'password'" class="form-control" placeholder="Mật khẩu">
+              <div class="input-group-prepend">
+                <button class="input-group-text" (click)="password()"><i class="fas fa-user"></i></button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <input type="submit" value="Đăng kí" class="btn float-right login_btn">
+            </div>
+          </div>
+        <div class="col-md-4 mx-my-0">
+          <div class="d-flex justify-content-center">
+            Tạo tài khoản với
+          </div>
+          <div class="d-flex justify-content-center social_icon">
+            <span><i class="fab fa-facebook-square"></i></span>
+            <span><i class="fab fa-google-plus-square"></i></span>
+            <span><i class="fab fa-twitter-square"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center"  style="padding-bottom:10px">
+        Khi bấm tạo tài khoản bạn đã đồng ý với quy định của tòa soạn
+      </div>
+      </ng-template>
+    </ng-container>
+  </nav>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</ng-template>
+
+<nav class="navbar navbar-expand-lg navbar-light py-4 ml-auto" style="background-color: #FFFFFF;">
+    <a class="navbar-brand ml-3" style="margin-right: 150px;padding-left: 30px;" href="#"><img src="assets\images\logo.png" width="100px"></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav" style="width: 100%;">
+        <div class="col-md-8 mx-my-0">
+          <div class="row justify-content-end">
+            <form class="form-inline ml-3" method="get" action="#">
+              <button  type="submit" class="btn btn-outline-danger ml-5 navmenu" style="border-radius:14px;">
+                #PREMIUM
+              </button>
+            </form>
+            <form class="form-inline ml-3" method="get" action="#">
+              <button type="submit" class="btn btn-outline-danger ml-5 navmenu" style="border-radius:14px">
+                #COVID19
+              </button>
+            </form>
+            <form class="form-inline ml-5" style="margin-right: 30px;">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <a href="#"><img src="assets\images\search.png" width="30px"></a>
+            </form>
+          </div> 
+        </div>
+        <div class="col-md-8 mx-my-0">
+          <div class="row">
+            <form class="form-inline ml-3" [style]="navstyle">
+              <a [ngStyle]="{color: hothover==true? '#971928' :'red'}" (mouseover)="hothover=false" (mouseleave)="hothover=true" title="TIN NÓNG" href="#" style="margin-right: 30px;">TIN NÓNG</a>
+              |
+            </form>
+            <li class="form-inline ml-3" [style]="navstyle">
+              <a [ngStyle]="{color: dayhover==true? '#971928' :'red'}" (mouseover)="dayhover=false" (mouseleave)="dayhover=true" title="TIN TỨC 24H" href="#" style="margin-right: 30px;">TIN TỨC 24H</a>
+              |
+            </li>
+            <a (click)="openLogin(content)" ><img src="assets\images\user.png" width="50px" height="50px"></a>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="white-space: nowrap;">
+    <a href="#"><button type="button" class="btn btn-outline-secondary menulist">Chính trị</button></a>
+    <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Thời Sự
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Chống tham nhũng</a>
+          <a class="dropdown-item" href="#">Quốc hội</a>
+          <a class="dropdown-item" href="#">An toàn giao thông</a>
+          <a class="dropdown-item" href="#">Môi trường</a>
+          <a class="dropdown-item" href="#">Clip nóng</a>
+          <a class="dropdown-item" href="#">BHXH - BHYT</a>
+          <a class="dropdown-item" href="#">Quốc phòng</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Kinh doanh
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Tài chính</a>
+          <a class="dropdown-item" href="#">Đầu tư</a>
+          <a class="dropdown-item" href="#">Thị trường</a>
+          <a class="dropdown-item" href="#">Doanh nhân</a>
+          <a class="dropdown-item" href="#">Tư vấn tài chính</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Giải trí
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Thế giới sao</a>
+          <a class="dropdown-item" href="#">Thời trang</a>
+          <a class="dropdown-item" href="#">Nhạc</a>
+          <a class="dropdown-item" href="#">Phim</a>
+          <a class="dropdown-item" href="#">Truyền hình</a>
+          <a class="dropdown-item" href="#">Sách</a>
+          <a class="dropdown-item" href="#">Di sản - Mỹ thuật - Sân khấu</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Thế giới
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Bình luận quốc tế</a>
+          <a class="dropdown-item" href="#">Chân dung</a>
+          <a class="dropdown-item" href="#">Hồ sơ</a>
+          <a class="dropdown-item" href="#">Thế giới đó đây</a>
+          <a class="dropdown-item" href="#">Việt Nam và thế giới</a>
+          <a class="dropdown-item" href="#">Quân sự</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Giáo dục
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Việc làm</a>
+          <a class="dropdown-item" href="#">Người thầy</a>
+          <a class="dropdown-item" href="#">Tuyển sinh</a>
+          <a class="dropdown-item" href="#">Du học</a>
+          <a class="dropdown-item" href="#">Gương mặt trẻ</a>
+          <a class="dropdown-item" href="#">Góc phụ huynh</a>
+          <a class="dropdown-item" href="#">Học tiếng anh</a>
+          <a class="dropdown-item" href="#">Khoa học</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Gia đình
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Chuyện lạ</a>
+          <a class="dropdown-item" href="#">Giới trẻ</a>
+          <a class="dropdown-item" href="#">Đời sống</a>
+          <a class="dropdown-item" href="#">Tâm sự</a>
+          <a class="dropdown-item" href="#">Ẩm thực</a>
+          <a class="dropdown-item" href="#">Mẹo vặt</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Pháp luật
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Hồ sơ vụ án</a>
+          <a class="dropdown-item" href="#">Ký sự pháp đình</a>
+          <a class="dropdown-item" href="#">Tư vấn pháp luật</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Thể thao
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Bóng đá Việt Nam</a>
+          <a class="dropdown-item" href="#">Bóng đá quốc tế</a>
+          <a class="dropdown-item" href="#">Hậu trường</a>
+          <a class="dropdown-item" href="#">Các môn khác</a>
+          <a class="dropdown-item" href="#">Trực tiếp bóng đá</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Công nghệ
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Cộng đồng mạng</a>
+          <a class="dropdown-item" href="#">Sản phẩm</a>
+          <a class="dropdown-item" href="#">Ứng dụng</a>
+          <a class="dropdown-item" href="#">Viễn thông</a>
+          <a class="dropdown-item" href="#">Bảo mật</a>
+          <a class="dropdown-item" href="#">Thông tin truyền thông</a>
+          <a class="dropdown-item" href="#">Viet Solution</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sức khỏe
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Làm đẹp</a>
+          <a class="dropdown-item" href="#">Các bệnh</a>
+          <a class="dropdown-item" href="#">Tư vấn sức khỏe</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bất động sản
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Dự án</a>
+          <a class="dropdown-item" href="#">Nội thất</a>
+          <a class="dropdown-item" href="#">Tư vấn</a>
+          <a class="dropdown-item" href="#">Tin bất động sản</a>
+          <a class="dropdown-item" href="#">Nhà đẹp</a>
+          <a class="dropdown-item" href="#">Bắt sóng đầu tư</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bạn đọc
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Hồi âm</a>
+          <a class="dropdown-item" href="#">Chia sẻ</a>
+          <a class="dropdown-item" href="#">Thơ</a>
+        </div>
+      </div>
+      <a href="#"><button type="button" class="btn btn-outline-secondary menulist">Tuần Việt Nam</button></a>
+      <div class="dropdown">
+        <button id="dropdownMenuButton" type="button" class="btn btn-outline-secondary menulist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Giáo dục
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Xe mới</a>
+          <a class="dropdown-item" href="#">Khám phá</a>
+          <a class="dropdown-item" href="#">Sau tay lái</a>
+          <a class="dropdown-item" href="#">Diễn đàn</a>
+          <a class="dropdown-item" href="#">Tư vấn</a>
+          <a class="dropdown-item" href="#">Đánh giá xe</a>
+          <a class="dropdown-item" href="#">Giá xe</a>
+        </div>
+      </div>
+      <a href="#"><button type="button" class="btn btn-outline-secondary menulist">Du lịch</button></a>
+      <a href="#"><button type="button" class="btn btn-outline-secondary menulist">Video</button></a>
+  </div>
+<div style="color: #971928;">____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</div>
