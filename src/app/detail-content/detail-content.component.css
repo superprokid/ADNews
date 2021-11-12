@@ -1,0 +1,23 @@
+.title{
+    font-size: 35px;
+    line-height: 40px;
+}
+.time{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 15px;
+}
+.row{
+    font-size: 25px ;
+    line-height: 35px;
+}
+.link{
+    margin-left: 50px;
+    color: #971928;
+}
+.link-name:hover{
+    text-decoration: underline;
+}
+.content{
+    line-height: 35px;
+}

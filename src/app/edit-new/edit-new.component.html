@@ -1,0 +1,29 @@
+<div *ngIf="new">
+  <table>
+    <tr>
+      <td>Tên bài viết</td>
+      <td><input [(ngModel)]="new.title" placeholder="title"></td>
+    </tr>
+    <tr>
+      <td>Tóm tắt</td>
+      <td><input [(ngModel)]="new.shortDescription" placeholder="Tóm tắt"></td>
+    </tr>
+    <tr>
+      <td>Nội dung</td>
+      <td class="md-form">
+        <textarea type="text" id="form7" class="md-textarea form-control" [(ngModel)]="new.content" mdbInput></textarea>
+        <label for="form7"></label>
+      </td>
+    </tr>
+    <tr>
+      <td>thumbnail</td>
+      <td><input [(ngModel)]="new.thumbnail" placeholder="thumbnail"></td>
+    </tr>
+    <tr>
+      <td>Code thể loại</td>
+      <td><input [(ngModel)]="new.categoryCode" placeholder="Code thể loại"></td>
+    </tr>
+    <button (click)="save()">Save</button>
+    <button (click)="goBack()">Trở về</button>
+  </table>
+</div>

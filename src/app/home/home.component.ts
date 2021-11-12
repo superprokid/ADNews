@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { News } from 'src/models/news';
+import { NewsService } from '../news.service';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +17,19 @@ export class HomeComponent implements OnInit {
   lismall ='max-width:200px;line-height:30px;flex-direction:row;'
   carstyle ='font-weight:bold;font-size:20px'
   randomnum=randomNumber(90000000,95000000)
-  constructor() { }
+
+  news: News[] =[];
+
+  constructor(private newsService:NewsService) { }
+
   ngOnInit(): void {
+    this.getNews();
   }
+
+  getNews(): void{
+    this.newsService.getNews().subscribe(news => this.news = news.slice(1,5));
+  }
+
 }
 
 function randomNumber(min:number, max:number) {

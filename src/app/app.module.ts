@@ -14,7 +14,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HeaderAdminComponent } from './header-admin/header-admin.component';
 import { DetailContentComponent } from './detail-content/detail-content.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EditNewComponent } from './edit-new/edit-new.component';
+import { NewsService } from './news.service';
 
+  
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +28,7 @@ import { DetailContentComponent } from './detail-content/detail-content.componen
     FooterComponent,
     HeaderAdminComponent,
     DetailContentComponent,
+    EditNewComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +37,12 @@ import { DetailContentComponent } from './detail-content/detail-content.componen
     MDBBootstrapModule.forRoot(),
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    NewsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

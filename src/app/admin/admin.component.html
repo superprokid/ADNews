@@ -4,102 +4,93 @@
       <ng-container ngbNavItem>
         <a ngbNavLink class="d-flex justify-content-center" style="width: 100%; font-size: 20px;">Sửa</a>
           <ng-template ngbNavContent >
-            <div class="row">
-              <div class="col-md-4 mx-my-0 loginfrm">
-                <div class="d-flex justify-content-center edittitle">
-                  Tên bài viết
-                </div>
-                <div class="d-flex justify-content-center edittitle">
-                  Tóm tắt
-                </div>
-                <div class="d-flex justify-content-center edittitle">
-                  Nội dung
-                </div>
-              </div>
-            <div class="col-md-4 mx-my-0">
-              <div class="d-flex justify-content-center">
-                <input type="text" [(ngModel)]="content1[index].name">
-              </div>
-              <div class="md-form md-outline">
-                <textarea type="text" id="form75" class="form-control md-textarea" rows="3" [(ngModel)]="content1[index].area" mdbInput></textarea>
-              </div>
-              <div class="md-form md-outline">
-                <textarea type="text" id="form75" class="form-control md-textarea" rows="3" [(ngModel)]="content1[index].population" mdbInput></textarea>
-              </div>
-            </div>
-          </div>
+              <table>
+                <tr>
+                  <td>Tên bài viết</td>
+                  <td><input #newtitle placeholder="title"></td>
+                </tr>
+                <tr>
+                  <td>Tóm tắt</td>
+                  <td><input #newshortDescription placeholder="Tóm tắt"></td>
+                </tr>
+                <tr>
+                  <td>Nội dung</td>
+                  <td class="md-form">
+                    <textarea type="text" id="form7" class="md-textarea form-control" #newcontent mdbInput></textarea>
+                    <label for="form7"></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>thumbnail</td>
+                  <td><input #newthumbnail placeholder="thumbnail"></td>
+                </tr>
+                <tr>
+                  <td>Code thể loại</td>
+                  <td><input #newcategoryCode placeholder="Code thể loại"></td>
+                </tr>
+                <button (click)="add(newtitle.value,newcontent.value,newshortDescription.value,newcategoryCode.value,newthumbnail.value);
+                newtitle.value='';newshortDescription.value='';newcontent.value='';newcategoryCode.value='';newthumbnail.value=''">Add</button>
+              </table>
         </ng-template>
-
     </ng-container>
     </nav>
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
   </ng-template>
-
 <div class="d-flex">
-    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-      <li ngbNavItem="top">
-        <a ngbNavLink style="width:150px;">Quản lý bài viết</a>
-        <ng-template ngbNavContent>
-          <div class="container" style="max-width:initial;">
-            <table class="table table-striped" border="2">
-              <thead>
-              <tr style="text-align: center;">
-                <th><input type="checkbox" [(ngModel)]="contcheck"></th>
-                <th scope="col">#</th>
-                <th scope="col" style="width: 120px;">Tên bài viết</th>
-                <th scope="col" style="width: 900px;">Tóm tắt</th>
-                <th scope="col">Nội dung</th>
-                <th scope="col" style="width:100px">Chỉnh sửa</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let country of content1; index as i">
-                <td><input type="checkbox" [checked]="contcheck"></td>
-                <th scope="row">{{ i + 1 }}</th>
-                <td>
-                  <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
-                  <ngb-highlight [result]="country.name" [term]="filter.value"></ngb-highlight>
-                </td>
-                <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>
-                <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>
-                <td>  
-                    <button class="bth-primary editbtn" (click)="openEdit(content,i)"><img src="assets\images\sua.png" width="100%" height="100%"></button>
-                    <button class="bth-primary editbtn"><img src="assets\images\xoa.png" width="100%" height="100%"></button>
-                </td>
-              </tr>
-              </tbody>
-          </table>
-          </div>
-        </ng-template>
-      </li>
-      <li ngbNavItem="middle">
+  <table border="2">
+      <thead>
+        <tr>
+          <th><input type="checkbox" [(ngModel)]="contcheck"></th>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Short Description</th>
+          <th scope="col">category-code</th>
+          <th scope="col" style="width:100px">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of newlist; index as i">
+          <th><input type="checkbox" [checked]="contcheck"></th>
+          <th scope="row">{{item.id}}</th>
+          <th>{{item.title}}</th>
+          <th>{{item.shortDescription}}</th>
+          <th>{{item.categoryCode}}</th>
+          <th>  
+            <a routerLink="/edit-new/{{item.id}}"><img src="assets\images\sua.png" width="100%" height="100%"></a>
+            <button class="bth-primary editbtn"><img src="assets\images\xoa.png" width="100%" height="100%"></button>
+        </th>
+        </tr>
+      </tbody>
+  </table>
+</div>
+<button (click)="openAdd(content)">Add</button>
+<!-- <button (click)="Delete()">Delete</button> -->
+
+<!-- {{transfer[0]}} --- {{transfer[1]}} -->
+
+
+    <!-- <li ngbNavItem="middle">
         <a ngbNavLink>Quản lý nhân viên</a>
         <ng-template ngbNavContent>
-            <form>
-                <div class="form-group form-inline">
-                    Full text search: <input class="form-control ml-2" type="text"/>
-                </div>
-            </form>
             <table class="table table-striped">
                 <thead>
                 <tr>
                   <th><input type="checkbox" [(ngModel)]="usercheck"></th>
                   <th scope="col">#</th>
-                  <th scope="col">Country</th>
+                  <th scope="col">content</th>
                   <th scope="col">Area</th>
                   <th scope="col">Population</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let country of content1; index as i">
+                <tr *ngFor="let content of newlist; index as i">
                   <th><input type="checkbox" [checked]="usercheck"></th>
                   <th scope="row">{{ i + 1 }}</th>
                   <td>
-                    <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
-                    <ngb-highlight [result]="country.name" [term]="filter.value"></ngb-highlight>
+                    <ngb-highlight [result]="content.title" [term]="filter.value"></ngb-highlight>
                   </td>
-                  <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>
-                  <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="content.shortDescription | number" [term]="filter.value"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="content.categoryCode | number" [term]="filter.value"></ngb-highlight></td>
                 </tr>
                 </tbody>
             </table>
@@ -108,4 +99,4 @@
     </ul>
   
     <div [ngbNavOutlet]="nav" class="ml-4"></div>
-  </div>
+  </div> -->
