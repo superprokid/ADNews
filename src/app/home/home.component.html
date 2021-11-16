@@ -10,17 +10,25 @@
                <a href="#"><img src="assets\images\template1.png" height="500px"width="700px"></a> 
               </li>
               <li>
-                  <p style="font-weight: bold;font-size: 30px; line-height: 40px;">Xăng dầu cõng nhiều thuế phí,con số gánh nặng đè lên giá</p>
+                  <p style="font-weight: bold;font-size: 30px; line-height: 40px;">{{newslist[0].title}}</p>
               </li>
               <li>
-                  <p style="font-size: 20px; line-height: 30px;">Mỗi lít xăng bán ra thị trường 'gánh' gần 40% chi phí thuế. Trong đó thuế bảo vệ môi trường có mức thu cao nhất.</p>
+                  <p style="font-size: 20px; line-height: 30px;">{{newslist[0].shortDescription}}</p>
               </li>
 
               <div class="row">
+                <div *ngFor="let item of newslist | slice:1;let i=index">
+                  <div class ="col-md-4 mx-my-0 mt-3">
+                    <li [style]="lismall">
+                        <a href="#"><img src="assets\images\template1.png" height="150px"width="200px"></a> 
+                        <a href="#" [style]="listnewstyle">{{item.title}}</a>
+                      </li>
+                  </div>
+                </div>
                   <div class ="col-md-4 mx-my-0 mt-3">
                         <li [style]="lismall">
                             <a href="#"><img src="assets\images\template1.png" height="150px"width="200px"></a> 
-                            <a href="#" [style]="listnewstyle">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
+                            <a href="#" [style]="listnewstyle" class="">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
                           </li>
                   </div>
                   <div class ="col-md-4 mx-my-0 mt-3">
@@ -213,11 +221,6 @@
   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/EpRznodW6xQ"></iframe>
 </div>
 </div>
-
-
-
-
-
 
 
 

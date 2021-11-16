@@ -14,8 +14,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class NewsService {
-  private URL="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com//news";
-  private URLdetail="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com//new";
+  private URL="http://localhost:8081/news";
+  private URLdetail="http://localhost:8081/new";
+  private URLcategory="http://localhost:8081/category";
   getNews(): Observable<News[]>{
     // return of(FakeNews);
     return this.http.get<News[]>(this.URL).pipe(
@@ -43,18 +44,19 @@ export class NewsService {
       catchError(error => of(new News()))
     )
   }
-  deleteNews(idlist: number[]): Observable<Object   | null>{
-    const options ={
-      header: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-      body: idlist
-    }
-
-    return this.http.delete(this.URLdetail, options).pipe(
-      tap(_ => console.log(`Deleted News with ID = ${idlist[0]}`)),
+  deleteNews(deleteid: number): Observable<News | null>{
+    const deleteURL= `${this.URLdetail}/${deleteid}`;
+    return this.http.delete<News>(deleteURL,httpOptions).pipe(
+      tap(_ => console.log(`Deleted News with ID = ${deleteid}`)),
       catchError(() => of(null))
-    )
+    );
+  }
+  getNewWithCategory(idget:number): Observable<News[]>{
+    const getNewURL = `${this.URLcategory}/${idget}/news`;
+    return this.http.get<News[]>(getNewURL).pipe(
+      tap(receivedNews => console.log(`receivedNews = ${JSON.stringify(receivedNews)}`)),
+      catchError(error => of([]))
+    );
   }
 
   constructor(private http:HttpClient) { 

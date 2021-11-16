@@ -6,39 +6,21 @@
           <ng-template ngbNavContent >
               <table>
                 <tr>
-                  <td>Tên bài viết</td>
-                  <td><input #newtitle placeholder="title"></td>
-                </tr>
-                <tr>
-                  <td>Tóm tắt</td>
-                  <td><input #newshortDescription placeholder="Tóm tắt"></td>
-                </tr>
-                <tr>
-                  <td>Nội dung</td>
-                  <td class="md-form">
-                    <textarea type="text" id="form7" class="md-textarea form-control" #newcontent mdbInput></textarea>
-                    <label for="form7"></label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>thumbnail</td>
-                  <td><input #newthumbnail placeholder="thumbnail"></td>
+                  <td>Tên thể loại</td>
+                  <td><input #categoryTitle placeholder="Tên"></td>
                 </tr>
                 <tr>
                   <td>Code thể loại</td>
-                  <td><input #newcategoryCode placeholder="Code thể loại"></td>
+                  <td><input #categoryCode placeholder="Code"></td>
                 </tr>
-                <button (click)="add(newtitle.value,newcontent.value,newshortDescription.value,newcategoryCode.value,newthumbnail.value);
-                newtitle.value='';newshortDescription.value='';newcontent.value='';newcategoryCode.value='';newthumbnail.value=''">Add</button>
+                <button (click)="add(categoryTitle.value,categoryCode.value);
+                categoryTitle.value='';categoryCode.value=''">Add</button>
               </table>
         </ng-template>
     </ng-container>
     </nav>
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
   </ng-template>
-
-
-
 <div class="wrapper">
   <!-- Sidebar Holder -->
   <nav id="sidebar" class="active">
@@ -50,13 +32,13 @@
   Home
   </a>
   </li>
-  <li class="active">
+  <li>
   <a routerLink="/admin" aria-expanded="false" class="active">
   <i class="fa fa-file"></i>
   Quản lý bài viết
   </a>
   </li>
-  <li>
+  <li class="active">
     <a routerLink="/admin-category" aria-expanded="false">
     <i class="fa fa-layer-group"></i>
     Quản lý danh mục
@@ -93,44 +75,22 @@
           </div>
       </nav>
       <div class="d-flex ">
-        <div class="list-group">
-          <button
-            type="button"
-            class="list-group-item list-group-item-action" [class.active]="activeclass === 0" (click)="onClickActiveAll()" 
-            aria-current="true"
-          >
-            Tất cả bài viết
-          </button>
-          <div *ngFor="let item of categorieslist;index as i">
-            <button type="button" class="list-group-item list-group-item-action" [class.active]="activeclass === i+1" (click)="onClickActive(i+1,item.id!)">
-              {{item.name}}
-            </button>
-          </div>
-          <!-- <button type="button" class="list-group-item list-group-item-action" [class.active]="activeclass === 1" (click)="onClickActive(1)">
-            Thể thao
-          </button>
-          <button type="button" class="list-group-item list-group-item-action" [class.active]="activeclass === 2" (click)="onClickActive(2)">
-            Chính trị
-          </button> -->
-        </div>
         <table border="2" class="newstable">
             <thead>
               <tr class="text-center">
                 <th><input type="checkbox" [(ngModel)]="contcheck" (change)="countall($event)"></th>
-                <th scope="col">Title</th>
-                <th scope="col">Short Description</th>
+                <th scope="col">Category Name</th>
                 <th scope="col">category-code</th>
                 <th scope="col" style="width:100px">Edit</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of newlist; index as i">
+              <tr *ngFor="let item of categorieslist; index as i">
                 <th><input type="checkbox" [checked]="contcheck" (change)="count($event,item.id!)"></th>
-                <th class="itemcont">{{item.title}}</th>
-                <th class="itemcont">{{item.shortDescription}}</th>
-                <th class="itemcont">{{item.categoryCode}}</th>
+                <th class="itemcont">{{item.name}}</th>
+                <th class="itemcont">{{item.code}}</th>
                 <th>  
-                  <a routerLink="/edit-new/{{item.id}}"><img src="assets\images\sua.png" width="50%" height="100%"></a>
+                  <a routerLink="/edit-category/{{item.id}}"><img src="assets\images\sua.png" width="50%" height="100%"></a>
                   <button class="bth-primary editbtn" (click)="delete(item.id!)"><img src="assets\images\xoa.png" width="100%" height="100%"></button>
               </th>
               </tr>

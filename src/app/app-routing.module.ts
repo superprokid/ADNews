@@ -5,13 +5,17 @@ import { DetailContentComponent } from './detail-content/detail-content.componen
 import { HomeComponent } from './home/home.component';
 import { News } from 'src/models/news';
 import { EditNewComponent } from './edit-new/edit-new.component';
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { EditCategoryComponent } from './edit-category/edit-category.component';
 
 const routes: Routes = [
-  {path: "",pathMatch: "full",redirectTo: 'admin'},
+  {path: "",pathMatch: "full",redirectTo: 'home'},
   {path:"detail-content/:id",component:DetailContentComponent},
   {path: "home",component:HomeComponent},
   {path: "admin", component: AdminComponent},
-  {path: "edit-new/:id",component:EditNewComponent}
+  {path: "edit-new/:id",component:EditNewComponent},
+  {path: "admin-category",component: AdminCategoryComponent},
+  {path: "edit-category/:id",component:EditCategoryComponent}
 ];
 
 @NgModule({

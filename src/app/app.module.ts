@@ -17,6 +17,9 @@ import { DetailContentComponent } from './detail-content/detail-content.componen
 import { HttpClientModule } from '@angular/common/http';
 import { EditNewComponent } from './edit-new/edit-new.component';
 import { NewsService } from './news.service';
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { CategoriesService } from './categories.service';
+import { EditCategoryComponent } from './edit-category/edit-category.component';
 
   
 @NgModule({
@@ -29,6 +32,8 @@ import { NewsService } from './news.service';
     HeaderAdminComponent,
     DetailContentComponent,
     EditNewComponent,
+    AdminCategoryComponent,
+    EditCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,8 @@ import { NewsService } from './news.service';
     HttpClientModule,
   ],
   providers: [
-    NewsService
+    NewsService,
+    CategoriesService
   ],
   bootstrap: [AppComponent]
 })

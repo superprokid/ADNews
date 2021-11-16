@@ -18,16 +18,20 @@ export class HomeComponent implements OnInit {
   carstyle ='font-weight:bold;font-size:20px'
   randomnum=randomNumber(90000000,95000000)
 
-  news: News[] =[];
+  newslist: News[] =[];
 
   constructor(private newsService:NewsService) { }
 
   ngOnInit(): void {
-    this.getNews();
+    this.getNewsFromService();
   }
-
-  getNews(): void{
-    this.newsService.getNews().subscribe(news => this.news = news.slice(1,5));
+  getNewsFromService():void{
+    this.newsService.getNews().subscribe(
+      (updatedNews) => {
+        this.newslist = updatedNews;
+        console.log(`this.categorieslist = ${JSON.stringify(this.newslist)}`);
+      }
+    )
   }
 
 }

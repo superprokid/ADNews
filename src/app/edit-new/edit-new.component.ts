@@ -9,7 +9,7 @@ import { NewsService } from '../news.service';
 @Component({
   selector: 'app-edit-new',
   templateUrl: './edit-new.component.html',
-  styleUrls: ['./edit-new.component.css']
+  styleUrls: ['./edit-new.component.css','./sidebar.css']
 })
 export class EditNewComponent implements OnInit {
   @Input() new?:News;
@@ -34,5 +34,4 @@ export class EditNewComponent implements OnInit {
   goBack():void {
     this.location.back();
   }
-
 }

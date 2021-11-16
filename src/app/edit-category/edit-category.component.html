@@ -1,5 +1,5 @@
 <app-header-admin></app-header-admin>
-<div *ngIf="new">
+<div *ngIf="category">
   <div class="wrapper">
     <!-- Sidebar Holder -->
     <nav id="sidebar" class="active">
@@ -11,13 +11,13 @@
       Home
       </a>
       </li>
-      <li class="active">
+      <li>
       <a routerLink="/admin" aria-expanded="false" class="active">
       <i class="fa fa-file"></i>
       Quản lý bài viết
       </a>
       </li>
-      <li>
+      <li class="active">
         <a routerLink="/admin-category" aria-expanded="false">
         <i class="fa fa-layer-group"></i>
         Quản lý danh mục
@@ -45,38 +45,22 @@
             </div>
           </div>
           <div class="pull-left">
-            <button class="btn btn-white btn-info btn-bold" data-toggle="tooltip" title="Thêm bài viết" (click)="save()">
+            <button class="btn btn-white btn-info btn-bold" data-toggle="tooltip" title="Lưu thể loại" (click)="save()">
               <i class="fa fa-check" aria-hidden="true"></i>
             </button>
-            <button class="btn btn-white btn-warning btn-bold" data-toggle="tooltip" title="Xóa bài viết" (click)="goBack()">
+            <button class="btn btn-white btn-warning btn-bold" data-toggle="tooltip" title="Trở về" (click)="goBack()">
               <i class="fa fa-undo" aria-hidden="true"></i>
             </button>
           </div>
         </nav>
         <table style="width: 100%;">
           <tr>
-            <td class="edittitle">Tên bài viết</td>
-            <td><input [(ngModel)]="new.title" placeholder="title" class="editcont" ></td>
-          </tr>
-          <tr>
-            <td class="edittitle">Tóm tắt</td>
-            <td><input [(ngModel)]="new.shortDescription" placeholder="Tóm tắt" class="editcont"></td>
-          </tr>
-          <tr>
-            <td class="edittitle">Nội dung</td>
-            <td>
-              <textarea type="text" id="form7" class="md-textarea md-textarea-auto form-control" mdbInput [(ngModel)]="new.content"></textarea>
-              <label for="form7"></label>
-            </td>
-          </tr>
-          <!--  -->
-          <tr>
-            <td class="edittitle">thumbnail</td>
-            <td><input [(ngModel)]="new.thumbnail" placeholder="thumbnail" class="editcont"></td>
+            <td class="edittitle">Tên thể loại</td>
+            <td><input [(ngModel)]="category.name" placeholder="title" class="editcont" ></td>
           </tr>
           <tr>
             <td class="edittitle">Code thể loại</td>
-            <td><input [(ngModel)]="new.categoryCode" placeholder="Code thể loại" class="editcont"></td>
+            <td><input [(ngModel)]="category.code" placeholder="Tóm tắt" class="editcont"></td>
           </tr>
         </table>
       </div>
