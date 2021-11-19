@@ -20,6 +20,8 @@ import { NewsService } from './news.service';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
 import { CategoriesService } from './categories.service';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
+import { AddNewComponent } from './add-new/add-new.component';
+import { LineBreakPipe } from './line-break.pipe';
 
   
 @NgModule({
@@ -34,6 +36,8 @@ import { EditCategoryComponent } from './edit-category/edit-category.component';
     EditNewComponent,
     AdminCategoryComponent,
     EditCategoryComponent,
+    AddNewComponent,
+    LineBreakPipe,
   ],
   imports: [
     BrowserModule,

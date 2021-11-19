@@ -58,8 +58,6 @@ export class NewsService {
       catchError(error => of([]))
     );
   }
-
   constructor(private http:HttpClient) { 
   }
-
 }

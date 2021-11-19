@@ -4,3 +4,34 @@ ul {
 .newsunder{
     list-style-type: none;
 }
+.listnews{
+    text-decoration:none;
+    font-size:20px;
+    color:black;
+    line-height:25px
+}
+.contlistnews{
+    padding: 0 0 !important;
+}
+.lilistnews{
+    width: 200px;
+    line-height:30px;
+    flex-direction:row;
+}
+.imglist{
+    width: 30%;
+    margin-right: 500px;
+}
+.listnewsblue{
+    text-decoration:none;
+    font-size:15px;
+    color:#00254d;
+    line-height:25px
+}
+.typenewsblue{
+    text-decoration:none;
+    font-size:15px;
+    color:#001833;
+    font-weight:bold;
+    line-height:40px
+}

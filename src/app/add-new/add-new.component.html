@@ -1,12 +1,11 @@
 <app-header-admin></app-header-admin>
-<div *ngIf="new">
-  <div class="wrapper">
+<div class="wrapper">
     <!-- Sidebar Holder -->
     <nav id="sidebar" class="active">
 
       <ul class="list-unstyled components">
       <li>
-      <a href="/home" aria-expanded="false">
+      <a href="#homeSubmenu" aria-expanded="false">
       <i class="fa fa-home"></i>
       Home
       </a>
@@ -45,7 +44,7 @@
             </div>
           </div>
           <div class="pull-left">
-            <button class="btn btn-white btn-info btn-bold" data-toggle="tooltip" title="Thêm bài viết" (click)="save()">
+            <button class="btn btn-white btn-info btn-bold" data-toggle="tooltip" title="Thêm bài viết" (click)="add(newtitle.value,newcontent.value,newshortDescription.value,newcategoryCode.value,newthumbnail.value)">
               <i class="fa fa-check" aria-hidden="true"></i>
             </button>
             <button class="btn btn-white btn-warning btn-bold" data-toggle="tooltip" title="Xóa bài viết" (click)="goBack()">
@@ -56,29 +55,28 @@
         <table style="width: 100%;">
           <tr>
             <td class="edittitle">Tên bài viết</td>
-            <td><input [(ngModel)]="new.title" placeholder="title" class="editcont" ></td>
+            <td><input #newtitle placeholder="title" class="editcont" ></td>
           </tr>
           <tr>
             <td class="edittitle">Tóm tắt</td>
-            <td><input [(ngModel)]="new.shortDescription" placeholder="Tóm tắt" class="editcont"></td>
+            <td><input #newshortDescription placeholder="Tóm tắt" class="editcont"></td>
           </tr>
           <tr>
             <td class="edittitle">Nội dung</td>
             <td>
-              <textarea type="text" id="form7" class="md-textarea md-textarea-auto form-control" mdbInput [(ngModel)]="new.content"></textarea>
+              <textarea type="text" id="form7" class="md-textarea md-textarea-auto form-control" mdbInput #newcontent></textarea>
               <label for="form7"></label>
             </td>
           </tr>
           <!--  -->
           <tr>
             <td class="edittitle">thumbnail</td>
-            <td><input [(ngModel)]="new.thumbnail" placeholder="thumbnail" class="editcont"></td>
+            <td><input #newthumbnail placeholder="thumbnail" class="editcont"></td>
           </tr>
           <tr>
             <td class="edittitle">Code thể loại</td>
-            <td><input [(ngModel)]="new.categoryCode" placeholder="Code thể loại" class="editcont"></td>
+            <td><input #newcategoryCode placeholder="Code thể loại" class="editcont"></td>
           </tr>
         </table>
       </div>
     </div>
-</div>

@@ -27,7 +27,7 @@
 
   <ul class="list-unstyled components">
   <li>
-  <a href="#homeSubmenu" aria-expanded="false">
+  <a href="/home" aria-expanded="false">
   <i class="fa fa-home"></i>
   Home
   </a>
@@ -75,27 +75,27 @@
           </div>
       </nav>
       <div class="d-flex ">
-        <table border="2" class="newstable">
-            <thead>
-              <tr class="text-center">
-                <th><input type="checkbox" [(ngModel)]="contcheck" (change)="countall($event)"></th>
-                <th scope="col">Category Name</th>
-                <th scope="col">category-code</th>
-                <th scope="col" style="width:100px">Edit</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of categorieslist; index as i">
-                <th><input type="checkbox" [checked]="contcheck" (change)="count($event,item.id!)"></th>
-                <th class="itemcont">{{item.name}}</th>
-                <th class="itemcont">{{item.code}}</th>
-                <th>  
-                  <a routerLink="/edit-category/{{item.id}}"><img src="assets\images\sua.png" width="50%" height="100%"></a>
-                  <button class="bth-primary editbtn" (click)="delete(item.id!)"><img src="assets\images\xoa.png" width="100%" height="100%"></button>
-              </th>
-              </tr>
-            </tbody>
-        </table>
+            <table border="2" class="newstable">
+              <thead>
+                <tr class="text-center">
+                  <th class="p-2"><input type="checkbox" [(ngModel)]="contcheck" (change)="countall($event)"></th>
+                  <th class="p-2" scope="col">Category Name</th>
+                  <th class="p-2" scope="col">category-code</th>
+                  <th class="p-2" scope="col" style="width:100px">Edit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of categorieslist; index as i">
+                  <th class="p-2"><input type="checkbox" [checked]="contcheck" (change)="count($event,item.id!)"></th>
+                  <th class="itemcont p-2">{{item.name}}</th>
+                  <th class="itemcont p-2">{{item.code}}</th>
+                  <th class="p-2">  
+                    <a routerLink="/edit-category/{{item.id}}"><img src="assets\images\sua.png" width="50%" height="100%"></a>
+                    <button class="bth-primary editbtn" (click)="delete(item.id!)"><img src="assets\images\xoa.png" width="100%" height="100%"></button>
+                </th>
+                </tr>
+              </tbody>
+          </table>
       </div>
     </div>
   </div>

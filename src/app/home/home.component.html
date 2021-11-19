@@ -7,7 +7,7 @@
       <div class="col-md-6 mx-my-0 mt-3">
           <ul>
               <li style="margin-bottom: 10px">
-               <a href="#"><img src="assets\images\template1.png" height="500px"width="700px"></a> 
+               <a routerLink="/detail-content/{{newslist[0].id}}"><img src="assets\images\template1.png" height="500px"width="100%"></a> 
               </li>
               <li>
                   <p style="font-weight: bold;font-size: 30px; line-height: 40px;">{{newslist[0].title}}</p>
@@ -17,15 +17,15 @@
               </li>
 
               <div class="row">
-                <div *ngFor="let item of newslist | slice:1;let i=index">
-                  <div class ="col-md-4 mx-my-0 mt-3">
-                    <li [style]="lismall">
-                        <a href="#"><img src="assets\images\template1.png" height="150px"width="200px"></a> 
-                        <a href="#" [style]="listnewstyle">{{item.title}}</a>
+                <div *ngFor="let item of newslist | slice:1:4;let i=index" class ="col-lg-4 mx-my-0 mt-3">
+                  <ul class="contlistnews">
+                    <li class="lilistnews">
+                        <a routerLink="/detail-content/{{item.id}}"><img src="assets\images\template1.png" height="150px"width="200px"></a> 
+                        <a routerLink="/detail-content/{{item.id}}" class="listnews">{{item.title}}</a>
                       </li>
-                  </div>
+                    </ul>
                 </div>
-                  <div class ="col-md-4 mx-my-0 mt-3">
+                  <!-- <div class ="col-md-4 mx-my-0 mt-3">
                         <li [style]="lismall">
                             <a href="#"><img src="assets\images\template1.png" height="150px"width="200px"></a> 
                             <a href="#" [style]="listnewstyle" class="">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
@@ -42,7 +42,7 @@
                             <a href="#"><img src="assets\images\template1.png" height="150px"width="200px"></a> 
                             <a href="#" [style]="listnewstyle">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
                           </li>
-                  </div>
+                  </div> -->
               </div>
           </ul>
       </div>
@@ -54,7 +54,12 @@
           <li [style]="mb20">
             <a href="#"><img src="assets\images\made-in-vn.png" height="50px"width="200px"></a>
           </li>
-          <li [style]="mb20">
+          <div *ngFor="let item of newslist | slice:4:16;let i=index">
+            <li [style]="mb20"> 
+              <a routerLink="/detail-content/{{item.id}}" class="listnews">{{item.title}}</a>
+            </li>
+          </div>
+          <!-- <li [style]="mb20">
             <a href="#" [style]="listnewstyle">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
           </li>
           <li [style]="mb20"> 
@@ -89,7 +94,7 @@
           </li>
           <li [style]="mb20"> 
             <a href="#" [style]="listnewstyle">Từ hôm nay, đồng loạt giảm thuế nhiều dịch vụ</a>
-          </li>
+          </li> -->
         </ul>
         </div>
         <div class="col-md-4 mb-md-0 mb-3">
@@ -147,7 +152,20 @@
 <div class="row newsunder" style="margin-bottom: 100px;">
   <div class ="col-md-6 mx-my-0 mt-3">
       <div class="row">
-        <div class ="col-md-3 mx-my-0 mt-3">
+        <div *ngFor="let item of newslist | slice:16:19;let i=index" style="width: 100%;">
+          <div class ="col-md-3 mx-my-0 mt-3">
+            <span style="float: left;margin-right:20px;"><a href="#"><img src="assets\images\template1.png" height="100px"width="170px" ></a></span>
+          </div>     
+          <div class ="col-md-12 mx-my-0 mt-3">
+            <span>
+              <a routerLink="/detail-content/{{item.id}}" class="listnews">{{item.title}}</a>
+              <br>
+              <a routerLink="/detail-content/{{item.id}}" [style]="typenewstyle">{{item.categoryCode}}</a>
+              <span [style]="datestyle">14/06/2000</span>
+              </span>
+          </div>  
+        </div>
+        <!-- <div class ="col-md-3 mx-my-0 mt-3">
           <span style="float: left;margin-right:20px;"><a href="#"><img src="assets\images\template1.png" height="100px"width="170px" ></a></span>
         </div>     
         <div class ="col-md-9 mx-my-0 mt-3">
@@ -179,12 +197,24 @@
             <a href="#" [style]="typenewstyle">Truyền hình</a>
             <span [style]="datestyle">14/06/2000</span>
             </span>
-        </div>  
+        </div>   -->
       </div>
   </div>
-  <div class ="col-md-4 mx-my-0 mt-3" style="background-color: #F0F8FF;">
+  <div class ="col-md-6 mx-my-0 mt-3" style="background-color: #F0F8FF;">
     <div class="row">
-      <div class ="col-md-4 mx-my-0 mt-3">
+      <div *ngFor="let item of newslist | slice:19:22;let i=index" style="width: 100%;">
+        <div class ="col-md-3 mr-auto mt-3 imglist">
+          <span style="float: left;"><a href="#"><img src="assets\images\template1.png" height="100px"width="150px" ></a></span>
+        </div>     
+        <div class ="col-md-9 mx-my-0 mt-3">
+          <span>
+            <a routerLink="/detail-content/{{item.id}}" class="listnewsblue">{{item.title}}</a>
+            <br>
+            <a routerLink="/detail-content/{{item.id}}" class="typenewsblue">{{item.categoryCode}}</a>
+            </span>
+        </div>
+      </div>
+      <!-- <div class ="col-md-4 mx-my-0 mt-3">
         <span style="float: left;"><a href="#"><img src="assets\images\template1.png" height="100px"width="150px" ></a></span>
       </div>     
       <div class ="col-md-8 mx-my-0 mt-3">
@@ -213,7 +243,7 @@
           <br>
           <a href="#" [style]="typenewstyle2">THÔNG TIN & TRUYỀN THÔNG</a>
           </span>
-      </div> 
+      </div>  -->
     </div>
   </div>
 </div>

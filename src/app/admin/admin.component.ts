@@ -1,7 +1,7 @@
 import { Component, OnInit, PipeTransform } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormControl } from '@angular/forms';
-
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -29,7 +29,10 @@ export class AdminComponent implements OnInit {
   categorieslist: Categories[] = [];
   filter = new FormControl('');
   check = false;
-  constructor(private modalService:NgbModal,private newsService:NewsService,private categoriesService:CategoriesService) {
+  constructor(private modalService:NgbModal,
+    private newsService:NewsService,
+    private categoriesService:CategoriesService,
+    private router:Router) {
   }
   getNewsFromService():void{
     this.newsService.getNews().subscribe(
@@ -48,8 +51,10 @@ export class AdminComponent implements OnInit {
     )
   }
   selectedNew?: News;
-  openAdd(content:any):void {
-    this.modalService.open(content, { centered: true });
+  openAdd():void {
+    this.router.navigateByUrl('/add-new')
+    // this.modalService.open(content, { centered: true });
+
   }
   ngOnInit(): void {
     this.getNewsFromService();
@@ -69,21 +74,22 @@ export class AdminComponent implements OnInit {
     for(let i=0;i<this.categorieslist.length;i++){
       if(categoryCode === this.categorieslist[i].code){
         this.check=true;
-        return;
       }
     }
     if( this.check === false){
       alert("Không có category code như trên");
       return;
     }
-    this.check=false;
-    const addNews: News = new News();
-    addNews.title = title;
-    addNews.content = content;
-    addNews.shortDescription = shortDescription;
-    addNews.categoryCode = categoryCode;
-    addNews.thumbnail ="";
-    this.newsService.addNews(addNews).subscribe(insertedNew => {this.newlist?.push(insertedNew)});
+    else{
+      this.check=false;
+      const addNews: News = new News();
+      addNews.title = title;
+      addNews.content = content;
+      addNews.shortDescription = shortDescription;
+      addNews.categoryCode = categoryCode;
+      addNews.thumbnail ="";
+      this.newsService.addNews(addNews).subscribe(insertedNew => {this.newlist?.push(insertedNew)});
+    }
   }
   delete(newID:number): void{
     this.newsService.deleteNews(newID).subscribe(_ => {
