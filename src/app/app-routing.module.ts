@@ -11,7 +11,7 @@ import { AddNewComponent } from './add-new/add-new.component';
 import { NewsByCategoryComponent } from './news-by-category/news-by-category.component';
 
 const routes: Routes = [
-  {path: "",pathMatch: "full",redirectTo: 'home'},
+  {path: "",pathMatch: "full",redirectTo: 'admin'},
   {path:"detail-content/:id",component:DetailContentComponent},
   {path: "home",component:HomeComponent},
   {path: "admin", component: AdminComponent},
