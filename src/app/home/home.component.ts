@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   randomnum=randomNumber(90000000,95000000)
   categorieslist: Categories[] =[];
   newslist: News[] =[];
+  id?:number
 
   constructor(private newsService:NewsService,private categoriesService:CategoriesService) { }
 
@@ -52,6 +53,14 @@ export class HomeComponent implements OnInit {
         }
       }
     }
+  }
+  redirectCate(code:string | undefined){
+    for(let j=0;j<this.categorieslist.length;j++){
+      if(code === this.categorieslist[j].name){
+        this.id = this.categorieslist[j].id!
+      }
+    }
+    window.location.href = `/news-category/${this.id}`;
   }
 }
 

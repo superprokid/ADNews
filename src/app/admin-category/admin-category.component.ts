@@ -7,7 +7,8 @@ import { map, startWith } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Categories } from 'src/models/categories';
 import { CategoriesService } from '../categories.service';
-
+import { News } from 'src/models/news';
+import { NewsService } from '../news.service';
 
 import { each } from 'jquery';
 import { isNull } from '@angular/compiler/src/output/output_ast';
@@ -24,8 +25,12 @@ export class AdminCategoryComponent implements OnInit {
   idcont: number[] = [];
   content=''
   categorieslist: Categories[] = [];
+  newslist:News[] = [];
   filter = new FormControl('');
-  constructor(private modalService:NgbModal,private categoriesService:CategoriesService) {
+  deleteCate?:Categories
+  constructor(private modalService:NgbModal,
+    private categoriesService:CategoriesService,
+    private newsService:NewsService) {
   }
   getCategoriesFromService():void{
     this.categoriesService.getCategories().subscribe(
@@ -35,11 +40,20 @@ export class AdminCategoryComponent implements OnInit {
       }
     )
   }
+  getNewsFromService():void{
+    this.newsService.getNews().subscribe(
+      (updatedNews) => {
+        this.newslist = updatedNews;
+        console.log(`this.categorieslist = ${JSON.stringify(this.newslist)}`);
+      }
+    )
+  }
   openAdd(content:any):void {
     this.modalService.open(content, { centered: true });
   }
   ngOnInit(): void {
     this.getCategoriesFromService()
+    this.getNewsFromService()
   }
   add(name:string,code:string){
     name = name.trim();
@@ -59,9 +73,21 @@ export class AdminCategoryComponent implements OnInit {
     addCategory.code = code;
     this.categoriesService.addCategory(addCategory).subscribe(insertedCategory => {this.categorieslist.push(insertedCategory)});
   }
-  delete(newID:number): void{
-    this.categoriesService.deleteCategory(newID).subscribe(_ => {
-      this.categorieslist = this.categorieslist?.filter(eachCategory => eachCategory.id !== newID);
+  delete(cateID:number): void{
+    for(let i=0;i<this.categorieslist.length;i++){
+        if(cateID === this.categorieslist[i].id){
+          this.deleteCate = this.categorieslist[i]
+          break
+        }
+    }
+    for(let i=0;i<this.newslist.length;i++){
+      if(this.deleteCate?.code === this.newslist[i].categoryCode){
+        alert("Có News dính với Cate này!")
+        return;
+      }
+    }
+    this.categoriesService.deleteCategory(cateID).subscribe(_ => {
+      this.categorieslist = this.categorieslist?.filter(eachCategory => eachCategory.id !== cateID);
     })
   }
   count(e:Event,checkedid:number){

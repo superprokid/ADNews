@@ -17,13 +17,13 @@ a{
     color:white !important;
 }
 
-.dropdown:hover>.dropdown-menu {
+/* .dropdown:hover>.dropdown-menu {
     display: block;
-  }
-.menulist:active {
-    /*Without this, clicking will make it sticky*/
+  } */
+/* .menulist:active {
+    Without this, clicking will make it sticky
       pointer-events: none !important;
-}
+} */
 .menulist:hover{
     background-color: #971928 !important;
     color:white !important;

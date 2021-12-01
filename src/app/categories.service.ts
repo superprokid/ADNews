@@ -14,8 +14,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CategoriesService {
-  private URL="http://localhost:8081/categories";
-  private URLdetail="http://localhost:8081/category";
+  private URL="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com//categories";
+  private URLdetail="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com//category";
   getCategories(): Observable<Categories[]>{
     return this.http.get<Categories[]>(this.URL).pipe(
       tap(receivedNews => console.log(`receivedNews = ${JSON.stringify(receivedNews)}`)),

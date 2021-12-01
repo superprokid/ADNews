@@ -14,9 +14,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class NewsService {
-  private URL="http://localhost:8081/news";
-  private URLdetail="http://localhost:8081/new";
-  private URLcategory="http://localhost:8081/category";
+  private URL="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com//news";
+  private URLdetail="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com//new";
+  private URLcategory="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com//category";
   getNews(): Observable<News[]>{
     // return of(FakeNews);
     return this.http.get<News[]>(this.URL).pipe(

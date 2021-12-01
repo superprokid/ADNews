@@ -1,0 +1,72 @@
+<div class="text-center">
+    <app-header></app-header>
+</div>
+
+<div class="container-fluid text-center text-md-left">
+    <div class="row">
+        <div class="col-md-8 mx-my-0 mt-3">
+            <div class="row">
+                <div *ngFor="let item of newlist;let i=index" style="width: 100%;">
+                  <div class ="col-md-3 mx-my-0 mt-3">
+                    <span style="float: left;margin-right:20px;"><a href="#"><img src="assets\images\template1.png" height="100px"width="170px" ></a></span>
+                  </div>     
+                  <div class ="col-md-12 mx-my-0 mt-3">
+                    <span>
+                      <a routerLink="/detail-content/{{item.id}}" class="listnews">{{item.title}}</a>
+                      <br>
+                      <span [style]="datestyle">14/06/2000</span>
+                      </span>
+                  </div>  
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mx-my-0 mt-3">
+            <ul class="sidenews">
+                <li class="sidecategory">
+                    <a>{{randomCate1!.name}}</a>
+                </li>
+                <li>
+                    <ul class="contlistnews">
+                        <div class="lilistnews row">
+                            <div *ngFor="let item of newssidelist1;let i=index">
+                                <div class="lilistnews row">
+                                    <div class="col-4 mx-my-0 mt-3">
+                                        <a (click)="redirect(item.id)"><img src="assets\images\template1.png" height="100%"width="100%"></a> 
+                                    </div>
+                                    <div class="col-6 mx-my-0 mt-3">
+                                        <a (click)="redirect(item.id)" class="listnews">{{item.title}}</a>
+                                    </div>                          
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="sidenews">
+                <li class="sidecategory">
+                    <a>{{randomCate2!.name}}</a>
+                </li>
+                <li>
+                    <ul class="contlistnews">
+                        <div class="lilistnews row">
+                            <div *ngFor="let item of newssidelist2;let i=index">
+                                <div class="lilistnews row">
+                                    <div class="col-4 mx-my-0 mt-3">
+                                        <a (click)="redirect(item.id)"><img src="assets\images\template1.png" height="100%"width="100%"></a> 
+                                    </div>
+                                    <div class="col-6 mx-my-0 mt-3">
+                                        <a (click)="redirect(item.id)" class="listnews">{{item.title}}</a>
+                                    </div>                          
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+  
+
+
+<app-footer></app-footer>

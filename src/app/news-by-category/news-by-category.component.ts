@@ -1,42 +1,36 @@
 //@ts-nocheck
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { News } from 'src/models/news';
-import { NewsService } from '../news.service';
 import { ActivatedRoute } from '@angular/router';
-import { Pipe, PipeTransform } from '@angular/core';
+import { NewsService } from '../news.service';
 import { Categories } from 'src/models/categories';
 import { CategoriesService } from '../categories.service';
 
 @Component({
-  selector: 'app-detail-content',
-  templateUrl: './detail-content.component.html',
-  styleUrls: ['./detail-content.component.css']
+  selector: 'app-news-by-category',
+  templateUrl: './news-by-category.component.html',
+  styleUrls: ['./news-by-category.component.css']
 })
-export class DetailContentComponent implements OnInit {
-  @Pipe({ name: 'replaceLineBreaks' })
-  new?: News;
+export class NewsByCategoryComponent implements OnInit {
+  newlist?: News[];
   categorieslist: Categories[] = []
   randomCate1?: Categories
   randomCate2?: Categories
   numberid?: number = NaN
   newssidelist1: News[] = []
   newssidelist2: News[] = []
+  datestyle ='margin-left: 1rem;color:grey;font-size:18px'
+  typenewstyle = 'text-decoration:none;font-size:20px;color:#971928;font-weight:bold;line-height:40px'
   constructor(
     private route: ActivatedRoute,
     private newsService: NewsService,
     private categoriesService: CategoriesService,
-
   ) { }
+
   ngOnInit(): void {
-    this.getNewsFromRoute();
     this.getCategoriesFromService();
-  }
-  getNewsFromRoute(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.route.snapshot.paramMap)}`);
-    this.newsService.getNewsWithID(id).subscribe(News => this.new = News);
-    console.log(`${JSON.stringify(this.new?.content)}`);
+    this.getNewsFromRoute()
   }
   getCategoriesFromService(): void {
     this.categoriesService.getCategories().subscribe(
@@ -70,6 +64,26 @@ export class DetailContentComponent implements OnInit {
         console.log(`this.categorieslist = ${JSON.stringify(this.newssidelist2)}`);
       }
     )
+  }
+  getNewsFromRoute(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.route.snapshot.paramMap)}`);
+    this.newsService.getNewWithCategory(id).subscribe(
+      (newslist) => {
+        this.newlist = newslist;
+        this.codeToName();
+        console.log(`this.categorieslist = ${JSON.stringify(this.newlist)}`);
+      }
+    )
+  }
+  codeToName():void{
+    for(let i=0;i<this.newlist.length;i++){
+      for(let j=0;j<this.categorieslist.length;j++){
+        if(this.newlist[i].categoryCode === this.categorieslist[j].code){
+          this.newlist[i].categoryCode = this.categorieslist[j].name;
+        }
+      }
+    }
   }
   redirect(id: number | undefined): void {
     window.location.href = `/detail-content/${id}`;

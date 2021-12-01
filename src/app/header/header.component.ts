@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { Categories } from 'src/models/categories';
+import { CategoriesService } from '../categories.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,15 +14,43 @@ export class HeaderComponent implements OnInit {
   content=''
   hothover=true;
   dayhover=true;
+  presses=true;
   show: boolean = false;
-  constructor(private modalService:NgbModal) { }
+  categorieslist: Categories[] = [];
+  login=false;
+  constructor(private modalService:NgbModal,
+    private categoriesService:CategoriesService,
+    private router:Router
+    ) { }
   openLogin(content:any) {
+    // this.router.navigate([`/admin`])
     this.modalService.open(content, { centered: true });
   }
   password() {
     this.show = !this.show;
   }
   ngOnInit(): void {
+    this.getCategoriesFromService();
   }
-
+  redirect(id: number | undefined): void {
+    window.location.href = `/news-category/${id}`;
+  }
+  getCategoriesFromService():void{
+    this.categoriesService.getCategories().subscribe(
+      (updatedCategories) => {
+        this.categorieslist = updatedCategories;
+        console.log(`this.newlist = ${JSON.stringify(this.categorieslist)}`);
+      }
+    )
+  }
+  redirectTo(uri:string,id:number | undefined){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([`${uri}/${id}`]));
+ }
+ logOut(){
+    this.login=false
+ }
+ logIn(){
+   this.login=true
+  } 
 }

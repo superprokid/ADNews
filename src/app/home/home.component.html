@@ -1,4 +1,4 @@
-<div class="text-center">
+  <div class="text-center">
   <app-header></app-header>
 </div>
 
@@ -154,13 +154,13 @@
       <div class="row">
         <div *ngFor="let item of newslist | slice:16:19;let i=index" style="width: 100%;">
           <div class ="col-md-3 mx-my-0 mt-3">
-            <span style="float: left;margin-right:20px;"><a href="#"><img src="assets\images\template1.png" height="100px"width="170px" ></a></span>
+            <span style="float: left;margin-right:20px;"><a routerLink="/detail-content/{{item.id}}"><img src="assets\images\template1.png" height="100px"width="170px" ></a></span>
           </div>     
           <div class ="col-md-12 mx-my-0 mt-3">
             <span>
               <a routerLink="/detail-content/{{item.id}}" class="listnews">{{item.title}}</a>
               <br>
-              <a routerLink="/detail-content/{{item.id}}" [style]="typenewstyle">{{item.categoryCode}}</a>
+              <a (click)="redirectCate(item.categoryCode)" [style]="typenewstyle">{{item.categoryCode}}</a>
               <span [style]="datestyle">14/06/2000</span>
               </span>
           </div>  
@@ -204,13 +204,13 @@
     <div class="row">
       <div *ngFor="let item of newslist | slice:19:22;let i=index" style="width: 100%;">
         <div class ="col-md-3 mr-auto mt-3 imglist">
-          <span style="float: left;"><a href="#"><img src="assets\images\template1.png" height="100px"width="150px" ></a></span>
+          <span style="float: left;"><a routerLink="/detail-content/{{item.id}}"><img src="assets\images\template1.png" height="100px"width="150px" ></a></span>
         </div>     
         <div class ="col-md-9 mx-my-0 mt-3">
           <span>
             <a routerLink="/detail-content/{{item.id}}" class="listnewsblue">{{item.title}}</a>
             <br>
-            <a routerLink="/detail-content/{{item.id}}" class="typenewsblue">{{item.categoryCode}}</a>
+            <a (click)="redirectCate(item.categoryCode)" class="typenewsblue">{{item.categoryCode}}</a>
             </span>
         </div>
       </div>

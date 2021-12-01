@@ -12,7 +12,7 @@ import { NewsService } from '../news.service';
   styleUrls: ['./edit-new.component.css','./sidebar.css']
 })
 export class EditNewComponent implements OnInit {
-  @Input() new?:News;
+  new?:News;
   constructor(
     private route:ActivatedRoute,
     private newsService:NewsService,
