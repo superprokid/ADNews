@@ -72,7 +72,17 @@
           <!--  -->
           <tr>
             <td class="edittitle">thumbnail</td>
-            <td><input [(ngModel)]="new.thumbnail" placeholder="thumbnail" class="editcont"></td>
+            <td>
+              <!-- <input type="file" (change)="onFileChanged($event)" class="editcont"> -->
+              <input type="file" id="selectedFile" (change)="onFileChanged($event)" style="display: none;" accept="image/png"/>
+              <input type="button" value="Chọn tệp..." onclick="document.getElementById('selectedFile').click();" />
+            </td>
+          </tr>
+          <tr>
+            <td class="edittitle">Preview</td>
+              <td *ngIf=preview>
+                <img [src]="preview" class="previewimg">
+              </td>
           </tr>
           <tr>
             <td class="edittitle">Code thể loại</td>

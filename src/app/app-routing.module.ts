@@ -20,7 +20,6 @@ const routes: Routes = [
   {path: "edit-category/:id",component:EditCategoryComponent},
   {path: "add-new",component:AddNewComponent},
   {path: "news-category/:id",component:NewsByCategoryComponent},
-  
 ];
 
 @NgModule({

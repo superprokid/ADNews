@@ -53,8 +53,9 @@ import { NewsByCategoryComponent } from './news-by-category/news-by-category.com
   ],
   providers: [
     NewsService,
-    CategoriesService
+    CategoriesService,
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

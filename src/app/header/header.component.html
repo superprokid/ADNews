@@ -1,0 +1,159 @@
+
+<ng-template #content let-modal>
+  <nav ngbNav #nav="ngbNav" class="nav-tabs">
+    <ng-container ngbNavItem>
+      <a ngbNavLink class="d-flex justify-content-center" style="width: 50%; font-size: 20px;">Đăng nhập</a>
+      <ng-template ngbNavContent >
+        <div class="row">
+          <div class="col-md-7 mx-my-0 loginfrm">
+            <div class="d-flex justify-content-center">
+              Đăng nhập với tài khoản
+            </div>
+            <div class="input-group form-group">
+              <input type="text" class="form-control" placeholder="Tài khoản">     
+            </div>
+            <div class="input-group form-group">
+              <input [type]="show ? 'text' : 'password'" class="form-control" placeholder="Mật khẩu">
+              <div class="input-group-prepend">
+                <button class="input-group-text" (click)="password()"><i class="fas fa-user"></i></button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <input type="submit" value="Đăng nhập" class="btn float-right login_btn" (click)="logIn();modal.close('Close click')"  data-dismiss="modal">
+            </div>
+            <div class="d-flex justify-content-center">
+              <a href="#" style="padding-bottom:10px">Lấy lại mật khẩu</a>
+            </div>
+          </div>
+        <div class="col-md-4 mx-my-0">
+          <div class="d-flex justify-content-center">
+            Đăng nhập với
+          </div>
+          <div class="d-flex justify-content-center social_icon">
+            <span><i class="fab fa-facebook-square"></i></span>
+            <span><i class="fab fa-google-plus-square"></i></span>
+            <span><i class="fab fa-twitter-square"></i></span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+    <ng-container ngbNavItem>
+      <a ngbNavLink class="d-flex justify-content-center" style="width: 50%; font-size: 20px;">Đăng kí tài khoản</a>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="col-md-7 mx-my-0 loginfrm">
+            <div class="d-flex justify-content-center">
+              Tạo tài khoản ADNews
+            </div>
+            <div class="d-flex justify-content-center">
+              Để sử dụng đầy đủ tính năng đọc báo
+            </div>
+            <div class="d-flex justify-content-center">
+              Và tham gia cộng đồng
+            </div>
+            <div class="input-group form-group">
+              <input type="text" class="form-control" placeholder="Tài khoản">     
+            </div>
+            <div class="input-group form-group">
+              <input [type]="show ? 'text' : 'password'" class="form-control" placeholder="Mật khẩu">
+              <div class="input-group-prepend">
+                <button class="input-group-text" (click)="password()"><i class="fas fa-user"></i></button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <input type="submit" value="Đăng kí" class="btn float-right login_btn">
+            </div>
+          </div>
+        <div class="col-md-4 mx-my-0">
+          <div class="d-flex justify-content-center">
+            Tạo tài khoản với
+          </div>
+          <div class="d-flex justify-content-center social_icon">
+            <span><i class="fab fa-facebook-square"></i></span>
+            <span><i class="fab fa-google-plus-square"></i></span>
+            <span><i class="fab fa-twitter-square"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center"  style="padding-bottom:10px">
+        Khi bấm tạo tài khoản bạn đã đồng ý với quy định của tòa soạn
+      </div>
+      </ng-template>
+    </ng-container>
+  </nav>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</ng-template>
+<div class="text-center">
+  <nav class="navbar navbar-expand-lg navbar-light py-4 ml-auto">
+    <a class="navbar-brand ml-3" style="margin-right: 150px;padding-left: 30px;" routerLink="/home"><img src="assets\images\logo.png" width="100px"></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav" style="width: 100%;">
+        <div class="col-md-7 mx-my-0">
+          <div class="row justify-content-end">
+            <form class="form-inline ml-3" method="get" action="#">
+              <button  type="submit" class="btn btn-outline-danger ml-5 navmenu" style="border-radius:14px;">
+                #PREMIUM
+              </button>
+            </form>
+            <form class="form-inline ml-3" method="get" action="#">
+              <button type="submit" class="btn btn-outline-danger ml-5 navmenu" style="border-radius:14px">
+                #COVID19
+              </button>
+            </form>
+            <form class="form-inline ml-5" style="margin-right: 30px;">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <a href="#"><img src="assets\images\search.png" width="30px"></a>
+            </form>
+          </div> 
+        </div>
+        <div class="col-md-5 mx-my-0">
+          <div class="row">
+            <form class="form-inline ml-3" [style]="navstyle">
+              <a [ngStyle]="{color: hothover==true? '#971928' :'red'}" (mouseover)="hothover=false" (mouseleave)="hothover=true" title="TIN NÓNG" href="#" style="margin-right: 30px;">TIN NÓNG</a>
+              |
+            </form>
+            <li class="form-inline ml-3" [style]="navstyle">
+              <a [ngStyle]="{color: dayhover==true? '#971928' :'red'}" (mouseover)="dayhover=false" (mouseleave)="dayhover=true" title="TIN TỨC 24H" href="#" style="margin-right: 30px;">TIN TỨC 24H</a>
+              |
+            </li>
+            <div *ngIf="login ===false">
+              <a (click)="openLogin(content)" ><img src="assets\images\user.png" width="50px" height="50px"></a>
+            </div>
+            <div *ngIf="login===true">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbar-list-4">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" routerLink="/admin">Admin</a>
+                      <a class="dropdown-item" (click)="logOut()">Log Out</a>
+                    </div>
+                  </li>   
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="white-space: nowrap;">
+    <!-- <a href="/news-category/2"><button type="button" class="btn btn-outline-secondary menulist">Chính trị</button></a> -->
+    <div *ngFor="let item of categorieslist; let i=index">
+      <div class="dropdown">
+        <button (click)="redirectTo('/news-category/',item.id)" type="button" class="btn btn-outline-secondary menulist" aria-haspopup="true" aria-expanded="false">
+          {{item.name}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div style="color: #971928;">____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</div>
+</div>
+

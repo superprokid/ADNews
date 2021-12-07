@@ -1,0 +1,267 @@
+<div
+  class="app-splash-screen"
+  *ngIf="showLoading"
+>
+  <div class="app-splash-inner">
+    <div class="app-loader"></div>
+  </div>
+</div>
+<app-header></app-header>
+<div class="container-fluid text-center text-md-left">
+    <div class="row">
+      <div class="col-md-6 mx-my-0 mt-3">
+          <ul>
+              <li style="margin-bottom: 10px">
+                <div *ngIf="newslist[0].thumbnail">
+                  <a routerLink="/detail-content/{{newslist[0].id}}"><img [src]="newslist[0].thumbnail" height="500px"width="100%"></a> 
+                </div>
+              </li>
+              <li>
+                <a routerLink="/detail-content/{{newslist[0].id}}"><p style="font-weight: bold;font-size: 30px; line-height: 40px;color: black;">{{newslist[0].title}}</p></a>
+              </li>
+              <li>
+                  <a routerLink="/detail-content/{{newslist[0].id}}"><p style="font-size: 20px; line-height: 30px;color: black;">{{newslist[0].shortDescription}}</p> </a>
+              </li>
+
+              <div class="row">
+                <div *ngFor="let item of newslist | slice:1:4;let i=index" class ="col-lg-4 mx-my-0 mt-3">
+                  <ul class="contlistnews">
+                    <li class="lilistnews">
+                      <div *ngIf="item.thumbnail">
+                        <a routerLink="/detail-content/{{item.id}}"><img [src]="item.thumbnail" height="150px"width="200px"></a> 
+                      </div>
+                        <a routerLink="/detail-content/{{item.id}}" class="listnews">{{item.title}}</a>
+                      </li>
+                    </ul>
+                </div>
+                  <!-- <div class ="col-md-4 mx-my-0 mt-3">
+                        <li [style]="lismall">
+                            <a href="#"><img src="assets\images\template1.png" height="150px"width="200px"></a> 
+                            <a href="#" [style]="listnewstyle" class="">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
+                          </li>
+                  </div>
+                  <div class ="col-md-4 mx-my-0 mt-3">
+                        <li [style]="lismall">
+                            <a href="#"><img src="assets\images\template1.png" height="150px"width="200px"></a> 
+                            <a href="#" [style]="listnewstyle">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
+                          </li>
+                  </div>
+                  <div class ="col-md-4 mx-my-0 mt-3">
+                        <li [style]="lismall">
+                            <a href="#"><img src="assets\images\template1.png" height="150px"width="200px"></a> 
+                            <a href="#" [style]="listnewstyle">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
+                          </li>
+                  </div> -->
+              </div>
+          </ul>
+      </div>
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <div class="col-md-2 mb-md-0">
+
+        <ul class="list-unstyled">
+          <li [style]="mb20">
+            <a href="#"><img src="assets\images\made-in-vn.png" height="50px"width="200px"></a>
+          </li>
+          <div *ngFor="let item of newslist | slice:4:16;let i=index">
+            <li [style]="mb20"> 
+              <a routerLink="/detail-content/{{item.id}}" class="listnews">{{item.title}}</a>
+            </li>
+          </div>
+          <!-- <li [style]="mb20">
+            <a href="#" [style]="listnewstyle">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">Từ hôm nay, đồng loạt giảm thuế nhiều dịch vụ</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">Australia tái mở cửa biên giới, Thư ký báo chí Nhà Trắng mắc Covid-19</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">Những phản ứng trẻ có thể gặp sau tiêm vắc xin Covid-19</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">Duyên muộn hạnh phúc của 'nhạc sĩ lãng tử' Hồng Đăng</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">'Cú sốc' của chàng kỹ sư người Việt ở tỉnh nghèo Nhật Bản</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">Loại quả một thời hàng vip nhập khẩu, nay rẻ hơn trái cây Trung Quốc</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">Bỏ chốt kiểm dịch để thuận tiện đi lại, lưu thông hàng hoá</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">Những phản ứng trẻ có thể gặp sau tiêm vắc xin Covid-19</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">Hai ông lớn trong 'làng' tên lửa hành trình ở châu Á - Thái Bình Dương</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">Số ca F0 tăng nhanh, các tỉnh miền Tây lo bùng dịch trở lại</a>
+          </li>
+          <li [style]="mb20"> 
+            <a href="#" [style]="listnewstyle">Từ hôm nay, đồng loạt giảm thuế nhiều dịch vụ</a>
+          </li> -->
+        </ul>
+        </div>
+        <div class="col-md-4 mb-md-0 mb-3">
+            <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+                <mdb-carousel-item>
+                  <div class="view w-100">
+                    <img class="d-block w-100" src="assets\images\chot-BD.png" alt="First slide" height="300px">
+                    <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+                  </div>
+                  <div class="carousel-caption">
+                    <h3 class="h3-responsive" [style]="carstyle">Chốt kiểm soát cửa ngõ ở Bình Dương được dỡ bỏ,xe cộ tập nập lưu thông</h3>
+                  </div>
+                </mdb-carousel-item>
+                <mdb-carousel-item>
+                  <div class="view w-100">
+                    <img class="d-block w-100" src="assets\images\xekhach.png" alt="Second slide" height="300px">
+                    <div class="mask rgba-black-strong waves-light" mdbWavesEffect></div>
+                  </div>
+                  <div class="carousel-caption">
+                    <h3 class="h3-responsive" [style]="carstyle">Cần Thơ mở lại tuyến xe khách đi Tp.HCM và 14 tỉnh</h3>
+                  </div>
+                </mdb-carousel-item>
+                <mdb-carousel-item>
+                  <div class="view w-100">
+                    <img class="d-block w-100" src="assets\images\dj.png" alt="Third slide" height="300px">
+                    <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+                  </div>
+                  <div class="carousel-caption">
+                    <h3 class="h3-responsive" [style]="carstyle">Quảng Nam cho mở lại karaoke, vũ trường ở vùng xanh và vàng</h3>
+                  </div>
+                </mdb-carousel-item>
+              </mdb-carousel>
+    </div>
+</div>
+
+<div class="row" style="background-color: #B7E9F7; font-size: 18px;">
+    <div class="col-md-2 mx-my-0 " style="background-color: blue;text-align: center">
+        <b style="color: white;">THÔNG TIN VACCINE</b>
+    </div>
+    <div class="col-md-4 mx-my-0 mt-2">
+        Số mũi tiêm hôm qua: 541,488 <a style="padding-left: 1rem;"></a>
+        Số mũi đã tiêm: <b>{{randomnum}}</b>
+    </div>
+    <div class="col-md-2 mx-my-0 " style="background-color: blue;text-align: center;float: none;">
+        <b style="color: white; padding-top:auto;">CA NHIỄM TẠI VIỆT NAM</b>
+    </div>
+    <div class="col-md-2 mx-my-0 mt-2">
+        Tổng: <b style="color: #0277bd;">950,000</b>
+    </div>
+    <div class="col-md-2 mx-my-0 mt-2">
+        Hôm qua: <b>5,504</b>
+    </div>
+</div>
+
+<div class="row newsunder" style="margin-bottom: 100px;">
+  <div class ="col-md-6 mx-my-0 mt-3">
+      <div class="row">
+        <div *ngFor="let item of newslist | slice:16:19;let i=index" style="width: 100%;">
+          <div class ="col-md-3 mx-my-0 mt-3">
+            <span style="float: left;margin-right:20px;"><a routerLink="/detail-content/{{item.id}}"><img src="assets\images\template1.png" height="100px"width="170px" ></a></span>
+          </div>     
+          <div class ="col-md-12 mx-my-0 mt-3">
+            <span>
+              <a routerLink="/detail-content/{{item.id}}" class="listnews">{{item.title}}</a>
+              <br>
+              <a (click)="redirectCate(item.categoryCode)" [style]="typenewstyle">{{item.categoryCode}}</a>
+              <span [style]="datestyle">14/06/2000</span>
+              </span>
+          </div>  
+        </div>
+        <!-- <div class ="col-md-3 mx-my-0 mt-3">
+          <span style="float: left;margin-right:20px;"><a href="#"><img src="assets\images\template1.png" height="100px"width="170px" ></a></span>
+        </div>     
+        <div class ="col-md-9 mx-my-0 mt-3">
+          <span>
+            <a href="#" [style]="listnewstyle">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
+            <br>
+            <a href="#" [style]="typenewstyle">Truyền hình</a>
+            <span [style]="datestyle">14/06/2000</span>
+            </span>
+        </div>  
+        <div class ="col-md-3 mx-my-0 mt-3">
+          <span style="float: left;margin-right:20px;"><a href="#"><img src="assets\images\template1.png" height="100px"width="170px" ></a></span>
+        </div>     
+        <div class ="col-md-9 mx-my-0 mt-3">
+          <span>
+            <a href="#" [style]="listnewstyle">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
+            <br>
+            <a href="#" [style]="typenewstyle">Truyền hình</a>
+            <span [style]="datestyle">14/06/2000</span>
+            </span>
+        </div>  
+        <div class ="col-md-3 mx-my-0 mt-3">
+          <span style="float: left;margin-right:20px;"><a href="#"><img src="assets\images\template1.png" height="100px"width="170px" ></a></span>
+        </div>     
+        <div class ="col-md-9 mx-my-0 mt-3">
+          <span>
+            <a href="#" [style]="listnewstyle">Thủ tướng: Chỉ cần là người Việt Nam, ở bất cứ đâu thấy nhau cũng ấm cúng</a>
+            <br>
+            <a href="#" [style]="typenewstyle">Truyền hình</a>
+            <span [style]="datestyle">14/06/2000</span>
+            </span>
+        </div>   -->
+      </div>
+  </div>
+  <div class ="col-md-6 mx-my-0 mt-3" style="background-color: #F0F8FF;">
+    <div class="row">
+      <div *ngFor="let item of newslist | slice:19:22;let i=index" style="width: 100%;">
+        <div class ="col-md-3 mr-auto mt-3 imglist">
+          <span style="float: left;"><a routerLink="/detail-content/{{item.id}}"><img src="assets\images\template1.png" height="100px"width="150px" ></a></span>
+        </div>     
+        <div class ="col-md-9 mx-my-0 mt-3">
+          <span>
+            <a routerLink="/detail-content/{{item.id}}" class="listnewsblue">{{item.title}}</a>
+            <br>
+            <a (click)="redirectCate(item.categoryCode)" class="typenewsblue">{{item.categoryCode}}</a>
+            </span>
+        </div>
+      </div>
+      <!-- <div class ="col-md-4 mx-my-0 mt-3">
+        <span style="float: left;"><a href="#"><img src="assets\images\template1.png" height="100px"width="150px" ></a></span>
+      </div>     
+      <div class ="col-md-8 mx-my-0 mt-3">
+        <span>
+          <a href="#" [style]="listnewstyle2">9 đơn vị cung cấp hóa đơn điện tử đầu tiên kết nối trực tiếp với Tổng cục Thuế</a>
+          <br>
+          <a href="#" [style]="typenewstyle2">CHÍNH PHỦ SỐ</a>
+          </span>
+      </div> 
+      <div class ="col-md-4 mx-my-0 mt-3">
+        <span style="float: left;"><a href="#"><img src="assets\images\template1.png" height="100px"width="150px" ></a></span>
+      </div>     
+      <div class ="col-md-8 mx-my-0 mt-3">
+        <span>
+          <a href="#" [style]="listnewstyle2">Người Việt đã có thể ứng dụng công nghệ AI để đầu tư tài chính</a>
+          <br>
+          <a href="#" [style]="typenewstyle2">CMCN 4.0</a>
+          </span>
+      </div> 
+      <div class ="col-md-4 mx-my-0 mt-3">
+        <span style="float: left;"><a href="#"><img src="assets\images\template1.png" height="100px"width="150px" ></a></span>
+      </div>     
+      <div class ="col-md-8 mx-my-0 mt-3">
+        <span>
+          <a href="#" [style]="listnewstyle2">Bộ TT&TT cảnh báo cuộc gọi lừa đảo từ số điện thoại quốc tế đang tấn công khách hàng</a>
+          <br>
+          <a href="#" [style]="typenewstyle2">THÔNG TIN & TRUYỀN THÔNG</a>
+          </span>
+      </div>  -->
+    </div>
+  </div>
+</div>
+<div class="embed-responsive embed-responsive-16by9" style="max-width: 500px;">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/EpRznodW6xQ"></iframe>
+</div>
+</div>
+
+
+
+
+<app-footer></app-footer>

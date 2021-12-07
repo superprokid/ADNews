@@ -14,11 +14,18 @@ import { Router } from '@angular/router';
 export class AddNewComponent implements OnInit {
   categorieslist: Categories[] = [];
   check = false;
+  selectedFile?: any;
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
+  message?: string;
+  imageName: any;
+  preview:any
   constructor(
     private router:Router,
     private newsService:NewsService,
     private location:Location,
-    private categoriesService:CategoriesService
+    private categoriesService:CategoriesService,
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +39,21 @@ export class AddNewComponent implements OnInit {
       }
     )
   }
-  add(title:string,content:string,shortDescription:string,categoryCode:string,thumbnail:string){
+  public onFileChanged(event:any) {
+    if(event.target.files[0].size > 1048576){
+      alert("Ảnh không được quá 1MB!")
+      return
+    }
+    this.selectedFile = event.target.files[0];
+    var reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+    reader.onload = (event) => { // called once readAsDataURL is completed
+      this.preview = event.target!.result;
+    }
+  }
+  add(title:string,content:string,shortDescription:string,categoryCode:string){
     title = title.trim();
     content = content.trim();
     shortDescription = shortDescription.trim();
@@ -53,17 +74,25 @@ export class AddNewComponent implements OnInit {
     }
     else{
       this.check=false;
-      const addNews: News = new News();
-      addNews.title = title;
-      addNews.content = content;
-      addNews.shortDescription = shortDescription;
-      addNews.categoryCode = categoryCode;
-      addNews.thumbnail ="";
-      this.newsService.addNews(addNews).subscribe();
-      window.location.href = "/admin";
+      // const addNews: News = new News();
+      // addNews.title = title;
+      // addNews.content = content;
+      // addNews.shortDescription = shortDescription;
+      // addNews.categoryCode = categoryCode;
+      // addNews.thumbnail ="";
+      // this.newsService.addNews(addNews).subscribe();
+      let newAdd = new FormData();
+      newAdd.append('title',title)
+      newAdd.append('shortDescription',shortDescription)
+      newAdd.append('content',content)
+      newAdd.append('categoryCode',categoryCode)
+      newAdd.append("imageFile", this.selectedFile);
+      this.newsService.addNewsTest(newAdd).subscribe(() => this.goBack());
     }
   }
   goBack():void{
-    this.location.back();
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate([`/admin`])
+    );
   }
 }

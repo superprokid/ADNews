@@ -4,3 +4,7 @@
 .editcont{
     width: 100%;
 }
+.previewimg{
+    max-width: 400px;
+    max-height: 400px;
+}

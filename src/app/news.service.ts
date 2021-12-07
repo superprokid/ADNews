@@ -14,9 +14,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class NewsService {
-  private URL="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com//news";
-  private URLdetail="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com//new";
-  private URLcategory="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com//category";
+  private URL="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/news";
+  private URLdetail="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/new";
+  private URLcategory="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/category";
   getNews(): Observable<News[]>{
     // return of(FakeNews);
     return this.http.get<News[]>(this.URL).pipe(
@@ -27,7 +27,7 @@ export class NewsService {
   getNewsWithID(id:number): Observable<News | undefined>{
     // return of(FakeNews.find(News => News.id === id))
     const url = `${this.URLdetail}/${id}`;
-    return this.http.get<News>(url).pipe(
+    return this .http.get<News>(url).pipe(
       tap(receivedNews => console.log(`receivedNews = ${JSON.stringify(receivedNews)}`)),
       catchError(error => of(new News()))
     )
@@ -38,11 +38,17 @@ export class NewsService {
       catchError(error => of(new News()))
     );
   }
+  updateNewTest(newupdate:FormData,idnewupdate:number): Observable<any>{
+    return this.http.put(`${this.URLdetail}/${idnewupdate}`,newupdate).pipe()
+  }
   addNews(newadd: News):Observable<News>{
     return this.http.post<News>(this.URLdetail,newadd,httpOptions).pipe(
       tap((news: News) => console.log(`added News = ${JSON.stringify(news)}`)),
       catchError(error => of(new News()))
     )
+  }
+  addNewsTest(newadd: FormData):Observable<FormData>{
+    return this.http.post<FormData>(this.URLdetail,newadd).pipe()
   }
   deleteNews(deleteid: number): Observable<News | null>{
     const deleteURL= `${this.URLdetail}/${deleteid}`;

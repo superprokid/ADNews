@@ -4,5 +4,5 @@ export class News {
 	content?: string;
 	shortDescription?: string;
 	categoryCode?: string;
-	thumbnail?: string;
+	thumbnail?: any;
 }
