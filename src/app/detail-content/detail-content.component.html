@@ -1,5 +1,6 @@
 <app-header></app-header>
-
+<div *ngFor="let item of newsindetail">
+</div>
 <div *ngIf="new">
     <div class="container-fluid text-center text-md-left">
         <div class="row">
@@ -7,16 +8,16 @@
                 <b class="title">{{new.title}}</b>
                 <div class="time">09/11/2021    11:12 GMT+7</div>
                 <div style="font-weight: 500;">{{new.shortDescription}}</div>
-                <ul class="link">
+                <ul class="link" *ngFor="let item of newsindetail">
                     <li class="link-name">
-                        <a>Cựu TGĐ công ty Gang thép Thái Nguyên tiếp tục hầu tòa</a>
+                        <a (click)=redirect(item.id)>{{item.title}}</a>
                     </li>
-                    <li class="link-name">
+                    <!-- <li class="link-name">
                         <a>Cựu Tổng GĐ gang thép Thái Nguyên lĩnh án cao nhất 9 năm 6 tháng tù</a>
                     </li>
                     <li class="link-name">
                         <a>Thất thoát hơn 830 tỷ đồng, TISCO không cần bồi thường?</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <div *ngIf="new.thumbnail">
                     <img [src]= "new.thumbnail" style="max-width: 70%;">            

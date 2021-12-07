@@ -9,6 +9,7 @@ import { AdminCategoryComponent } from './admin-category/admin-category.componen
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { AddNewComponent } from './add-new/add-new.component';
 import { NewsByCategoryComponent } from './news-by-category/news-by-category.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 const routes: Routes = [
   {path: "",pathMatch: "full",redirectTo: 'admin'},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: "edit-category/:id",component:EditCategoryComponent},
   {path: "add-new",component:AddNewComponent},
   {path: "news-category/:id",component:NewsByCategoryComponent},
+  {path:"search-result",component:SearchResultComponent}
 ];
 
 @NgModule({

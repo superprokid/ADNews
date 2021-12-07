@@ -23,6 +23,7 @@ import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { AddNewComponent } from './add-new/add-new.component';
 import { LineBreakPipe } from './line-break.pipe';
 import { NewsByCategoryComponent } from './news-by-category/news-by-category.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
   
 @NgModule({
@@ -40,6 +41,7 @@ import { NewsByCategoryComponent } from './news-by-category/news-by-category.com
     AddNewComponent,
     LineBreakPipe,
     NewsByCategoryComponent,
+    SearchResultComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@ export class NewsService {
   private URL="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/news";
   private URLdetail="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/new";
   private URLcategory="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/category";
+  private data?:string
   getNews(): Observable<News[]>{
     // return of(FakeNews);
     return this.http.get<News[]>(this.URL).pipe(
@@ -63,6 +64,21 @@ export class NewsService {
       tap(receivedNews => console.log(`receivedNews = ${JSON.stringify(receivedNews)}`)),
       catchError(error => of([]))
     );
+  }
+  getNewWithSearch(value:string): Observable<News[]>{
+    const getNewURL = `${this.URLdetail}/search?search=${value}`;
+    return this.http.get<News[]>(getNewURL).pipe(
+      tap(receivedNews => console.log(`receivedNews = ${JSON.stringify(receivedNews)}`)),
+      catchError(error => of([]))
+    );
+  }
+  setSearchValue(data:string){
+    this.data = data
+  }
+  getSearchValue(){
+    let temp = this.data
+    this.data = ""
+    return temp
   }
   constructor(private http:HttpClient) { 
   }

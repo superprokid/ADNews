@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Categories } from 'src/models/categories';
 import { CategoriesService } from '../categories.service';
+import { NewsService } from '../news.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
@@ -18,12 +19,14 @@ export class HeaderComponent implements OnInit {
   show: boolean = false;
   categorieslist: Categories[] = [];
   login=false;
+  searchValue:string = ""
   constructor(private modalService:NgbModal,
     private categoriesService:CategoriesService,
-    private router:Router
+    private router:Router,
+    private newsService:NewsService
     ) { }
   openLogin(content:any) {
-    // this.router.navigate([`/admin`])
+    this.router.navigate([`/admin`])
     this.modalService.open(content, { centered: true });
   }
   password() {
@@ -53,4 +56,10 @@ export class HeaderComponent implements OnInit {
  logIn(){
   this.router.navigate([`/admin`]);
   } 
+  search(){
+    console.log(this.searchValue)
+    this.newsService.setSearchValue(this.searchValue)
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([`/search-result`]))
+  }
 }

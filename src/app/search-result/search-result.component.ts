@@ -1,51 +1,40 @@
-//@ts-nocheck
-
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { News } from 'src/models/news';
 import { NewsService } from '../news.service';
-import { ActivatedRoute } from '@angular/router';
-import { Pipe, PipeTransform } from '@angular/core';
 import { Categories } from 'src/models/categories';
 import { CategoriesService } from '../categories.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-detail-content',
-  templateUrl: './detail-content.component.html',
-  styleUrls: ['./detail-content.component.css']
+  selector: 'app-search-result',
+  templateUrl: './search-result.component.html',
+  styleUrls: ['./search-result.component.css']
 })
-export class DetailContentComponent implements OnInit {
-  @Pipe({ name: 'replaceLineBreaks' })
-  new?: News;
+export class SearchResultComponent implements OnInit {
+  newslist: News[] = [];
   categorieslist: Categories[] = []
   randomCate1?: Categories
   randomCate2?: Categories
-  randomid?: number = NaN
-  base64Data:any
   numberid?: number = NaN
   numberid2?: number = NaN
   newssidelist1: News[] = []
   newssidelist2: News[] = []
-  newsindetail: News[] = []
+  datestyle ='margin-left: 1rem;color:grey;font-size:18px'
+  typenewstyle = 'text-decoration:none;font-size:20px;color:#971928;font-weight:bold;line-height:40px'
+  base64Data:any
+  data:string = "123"
+
   constructor(
     private route: ActivatedRoute,
     private newsService: NewsService,
     private categoriesService: CategoriesService,
-    private router:Router
+    private router: Router) { }
 
-  ) { }
   ngOnInit(): void {
-    this.getRandomNews();
-    this.getNewsFromRoute();
+    this.data = this.newsService.getSearchValue()!
     this.getCategoriesFromService();
-  }
-  getNewsFromRoute(): void {
-    const id = +this.route.snapshot.paramMap.get('id')!;
-    this.newsService.getNewsWithID(id).subscribe(News => {
-      this.new = News
-      this.base64Data = News?.thumbnail
-      this.new?.thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
-    });
+    this.getNewsFromService()
   }
   getCategoriesFromService(): void {
     this.categoriesService.getCategories().subscribe(
@@ -86,26 +75,32 @@ export class DetailContentComponent implements OnInit {
     )
   }
   redirect(id: number | undefined): void {
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    this.router.navigate([`/detail-content/${id}`]));
-  }
-  getRandomNews():void{
-    this.newsService.getNews().subscribe(
-      (News) => {
-        while (this.newsindetail.length <3){
-          this.newsindetail.push(News[Math.floor(Math.random() * this.categorieslist.length)]!)
-          for(let i=0;i<this.newsindetail.length-1;i++){
-              if(this.newsindetail[this.newsindetail.length-1].id === this.newsindetail[i].id){
-                this.newsindetail.pop()
-              }
-          }
-          console.log(`cai nay la detail news: ${this.newsindetail}`)
-        }
-      }
-    )
-
+    this.router.navigate([`/detail-content/${id}`])
   }
   redirectCate(id:number | undefined):void{
-    this.router.navigate([`/news-category/${id}`]);
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([`/news-category/${id}`]));
+  }
+  getNewsFromService():void{
+    this.newsService.getNewWithSearch(this.data).subscribe(
+      (updatedNews) => {
+        this.newslist = updatedNews
+        this.codeToName();
+        for(let i=0;i<this.newslist.length;i++){
+          this.base64Data = this.newslist[i].thumbnail
+          this.newslist[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
+        }
+        console.log(`NewList = ${JSON.stringify(this.newslist)}`);
+      }
+    )
+  }
+  codeToName():void{
+    for(let i=0;i<this.newslist.length;i++){
+      for(let j=0;j<this.categorieslist.length;j++){
+        if(this.newslist[i].categoryCode === this.categorieslist[j].code){
+          this.newslist[i].categoryCode = this.categorieslist[j].name;
+        }
+      }
+    }
   }
 }
