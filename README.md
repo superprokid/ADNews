@@ -29,7 +29,7 @@ Cloud Computing Project using Springboot and Angular with AWS Elastic Beanstalk
   - Select **Upload your code**
   - Choose file **ADNews.zip** we have built in the **Installation**
   - Select **Create Environment**
-- After created you will have a link same same like this Eg: angular-env.eba-bmi4r9de.ap-southeast-1.elasticbeanstalk.com
+- After created you will have a link same same like this Eg: http://angular-env.eba-bmi4r9de.ap-southeast-1.elasticbeanstalk.com
 
 ### TEST
 - Open your Browser
