@@ -1,27 +1,40 @@
-# ADNews
+# Cloud Computing Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.12.
 
-## Development server
+Cloud Computing Project using Springboot and Angular with AWS Elastic Beanstalk
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Installation:
+- Clone this project https://github.com/superprokid/ADNews.git (FrontEnd)
+- Open the project with IDE (Visual Studio Code,...)
+- Open terminal in IDE:
+- **nvm install**
+-  After done:
+  - **ng build**
+- Open folder contains this project
+- access **dist** folder
+- access **ADNews** folder
+- zip all the file in the folder( DO NOT ZIP THE FOLDER )
+  - **ADNews.zip** this .zip  file is used to deploy to AWS Elastic Beanstalk
 
-## Code scaffolding
+### Hosting AWS
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**Host Backend using Elastic Beanstalk**
+  - We have to remember **API Link** information to connect to the BackEnd
+- Open the project with IDE (Visual Studio Code,...)
+  - Edit **categories.service.ts** and **news.service.ts** in (src/app)
+- Using **API link** from the Backend and replace the URL in 2 files**Example**: URL= "http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/news";
+- Back to Amazone Web Service choose **Elastic Beanstalk**
+  - Fill Application name
+  - In Platform we choose **Tomcat**, **Tomcat 8.5 with Correto 8 running on 64bit Amazon Linux 2**
+  - Select **Upload your code**
+  - Choose file **ADNews.zip** we have built in the **Installation**
+  - Select **Create Environment**
+- After created you will have a link same same like this Eg: angular-env.eba-bmi4r9de.ap-southeast-1.elasticbeanstalk.com
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### TEST
+- Open your Browser
+- You can see the home screen
+- Press the icon on the top right corner
+- Press **Đăng nhập** no need to log in account
+  - You will able to see the admin page
+- At the Admin page,you can add,delete,edit,… with call of the API we have created in the BackEnd
