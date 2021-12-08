@@ -13,7 +13,7 @@ Cloud Computing Project using Springboot and Angular with AWS Elastic Beanstalk
 - Open folder contains this project
 - access **dist** folder
 - access **ADNews** folder
-- zip all the file in the folder( DO NOT ZIP THE FOLDER )
+- zip all the file and folder in the folder( DO NOT ZIP AT THE FOLDER OUTSIDE OF THE FILE)
   - **ADNews.zip** this .zip  file is used to deploy to AWS Elastic Beanstalk
 
 ### Hosting AWS
