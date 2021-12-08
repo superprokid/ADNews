@@ -7,7 +7,7 @@ Cloud Computing Project using Springboot and Angular with AWS Elastic Beanstalk
 - Clone this project https://github.com/superprokid/ADNews.git (FrontEnd)
 - Open the project with IDE (Visual Studio Code,...)
 - Open terminal in IDE:
-- **nvm install**
+- **npm install**
 -  After done:
   - **ng build**
 - Open folder contains this project
