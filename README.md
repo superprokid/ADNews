@@ -18,7 +18,7 @@ Cloud Computing Project using Springboot and Angular with AWS Elastic Beanstalk
 
 ### Hosting AWS
 
-**Host Backend using Elastic Beanstalk**
+**Host FrontEnd using Elastic Beanstalk**
   - We have to remember **API Link** information to connect to the BackEnd
 - Open the project with IDE (Visual Studio Code,...)
   - Edit **categories.service.ts** and **news.service.ts** in (src/app)
