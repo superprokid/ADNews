@@ -22,7 +22,7 @@ Cloud Computing Project using Springboot and Angular with AWS Elastic Beanstalk
   - We have to remember **API Link** information to connect to the BackEnd
 - Open the project with IDE (Visual Studio Code,...)
   - Edit **categories.service.ts** and **news.service.ts** in (src/app)
-- Using **API link** from the Backend and replace the URL in 2 files**Example**: URL= "http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/news";
+- Using **API link** from the Backend and replace the URL in 2 files **Example**: URL= "http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/news";
 - Back to Amazone Web Service choose **Elastic Beanstalk**
   - Fill Application name
   - In Platform we choose **Tomcat**, **Tomcat 8.5 with Correto 8 running on 64bit Amazon Linux 2**
