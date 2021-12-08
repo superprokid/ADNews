@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { DetailContentComponent } from './detail-content/detail-content.component';
 import { HomeComponent } from './home/home.component';
-import { News } from 'src/models/news';
 import { EditNewComponent } from './edit-new/edit-new.component';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
@@ -12,7 +11,7 @@ import { NewsByCategoryComponent } from './news-by-category/news-by-category.com
 import { SearchResultComponent } from './search-result/search-result.component';
 
 const routes: Routes = [
-  {path: "",pathMatch: "full",redirectTo: 'admin'},
+  {path: "",pathMatch: "full",redirectTo: 'home'},
   {path:"detail-content/:id",component:DetailContentComponent},
   {path: "home",component:HomeComponent},
   {path: "admin", component: AdminComponent},

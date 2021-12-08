@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
   id?:number
   base64Data: any;
   showLoading = true
-
   constructor(private newsService:NewsService,private categoriesService:CategoriesService) { }
 
   ngOnInit(): void {
@@ -33,7 +32,7 @@ export class HomeComponent implements OnInit {
   getNewsFromService():void{
     this.newsService.getNews().subscribe(
       (updatedNews) => {
-        this.newslist = updatedNews;
+        this.newslist = updatedNews.reverse();
         this.codeToName();
         for(let i=0;i<this.newslist.length;i++){
           this.base64Data = this.newslist[i].thumbnail

@@ -99,7 +99,7 @@ export class DetailContentComponent implements OnInit {
                 this.newsindetail.pop()
               }
           }
-          console.log(`cai nay la detail news: ${this.newsindetail}`)
+          console.log(`cai nay la detail news: ${this.newsindetail[3].title}`)
         }
       }
     )

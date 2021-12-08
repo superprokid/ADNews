@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
     private newsService:NewsService
     ) { }
   openLogin(content:any) {
-    this.router.navigate([`/admin`])
     this.modalService.open(content, { centered: true });
   }
   password() {

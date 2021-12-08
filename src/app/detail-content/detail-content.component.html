@@ -37,7 +37,7 @@
                                 <div *ngFor="let item of newssidelist1;let i=index">
                                     <div class="lilistnews row">
                                         <div class="col-4 mx-my-0 mt-3" *ngIf="item.thumbnail">
-                                            <a (click)="redirect(item.id)"><img [src]="item.thumbnail" height="100%"width="100%" style="max-height: 100px;"></a> 
+                                            <a (click)="redirect(item.id)"><img [src]="item.thumbnail" height="100%"width="100%" style="max-height: 100px; width: 160px"></a> 
                                         </div>
                                         <div class="col-6 mx-my-0 mt-3">
                                             <a (click)="redirect(item.id)" class="listnews">{{item.title}}</a>
@@ -80,7 +80,7 @@
                                 <div *ngFor="let item of newssidelist2;let i=index">
                                     <div class="lilistnews row">
                                         <div class="col-4 mx-my-0 mt-3" *ngIf="item.thumbnail">
-                                            <a (click)="redirect(item.id)"><img [src]="item.thumbnail" height="100%"width="100%" style="max-height: 100px;"></a> 
+                                            <a (click)="redirect(item.id)"><img [src]="item.thumbnail" height="100%" width="100%" style="max-height: 100px; width: 160px;"></a> 
                                         </div>
                                         <div class="col-6 mx-my-0 mt-3">
                                             <a (click)="redirect(item.id)" class="listnews">{{item.title}}</a>
