@@ -66,7 +66,7 @@ export class DetailContentComponent implements OnInit {
   getNewWithCategory1(id: number): void {
     this.newsService.getNewWithCategory(id).subscribe(
       (updatedNews) => {
-        this.newssidelist1 = updatedNews;
+        this.newssidelist1 = updatedNews.reverse();
         for(let i=0;i<this.newssidelist1.length;i++){
           this.base64Data = this.newssidelist1[i].thumbnail
           this.newssidelist1[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
@@ -77,7 +77,7 @@ export class DetailContentComponent implements OnInit {
   getNewWithCategory2(id: number): void {
     this.newsService.getNewWithCategory(this.randomCate2?.id!).subscribe(
       (updatedNews) => {
-        this.newssidelist2 = updatedNews;
+        this.newssidelist2 = updatedNews.reverse();
         for(let i=0;i<this.newssidelist2.length;i++){
           this.base64Data = this.newssidelist2[i].thumbnail
           this.newssidelist2[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;

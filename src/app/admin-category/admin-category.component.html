@@ -2,7 +2,7 @@
 <ng-template #content let-modal>
     <nav ngbNav #nav="ngbNav" class="nav-tabs">
       <ng-container ngbNavItem>
-        <a ngbNavLink class="d-flex justify-content-center" style="width: 100%; font-size: 20px;">Sửa</a>
+        <a ngbNavLink class="d-flex justify-content-center" style="width: 100%; font-size: 20px;">Thêm</a>
           <ng-template ngbNavContent >
               <table>
                 <tr>
@@ -90,7 +90,7 @@
                   <th class="itemcont p-2">{{item.name}}</th>
                   <th class="itemcont p-2">{{item.code}}</th>
                   <th class="p-2">  
-                    <a routerLink="/edit-new/{{item.id}}"><img src="assets\images\sua.png" width="50%"></a>
+                    <a routerLink="/edit-category/{{item.id}}"><img src="assets\images\sua.png" width="50%"></a>
                     <a (click)="delete(item.id!)"><img src="assets\images\xoa.png" width="50%"></a>
                 </th>
                 </tr>

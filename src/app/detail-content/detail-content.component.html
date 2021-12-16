@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 mx-my-0 mt-3 pl-5">
                 <b class="title">{{new.title}}</b>
-                <div class="time">09/11/2021    11:12 GMT+7</div>
+                <div class="time">{{new.createdDate | date:'dd/MM/yyyy - hh:mmaaa'}}</div>
                 <div style="font-weight: 500;">{{new.shortDescription}}</div>
                 <ul class="link" *ngFor="let item of newsindetail">
                     <li class="link-name">
@@ -34,10 +34,10 @@
                     <li>
                         <ul class="contlistnews">
                             <div class="lilistnews row">
-                                <div *ngFor="let item of newssidelist1;let i=index">
+                                <div *ngFor="let item of newssidelist1 | slice:0:3;let i=index">
                                     <div class="lilistnews row">
                                         <div class="col-4 mx-my-0 mt-3" *ngIf="item.thumbnail">
-                                            <a (click)="redirect(item.id)"><img [src]="item.thumbnail" height="100%"width="100%" style="max-height: 100px; width: 160px"></a> 
+                                            <a (click)="redirect(item.id)"><img [src]="item.thumbnail" height="100%"width="100%" style="max-height: 100px; min-width: 100px; max-width: 130px;"></a> 
                                         </div>
                                         <div class="col-6 mx-my-0 mt-3">
                                             <a (click)="redirect(item.id)" class="listnews">{{item.title}}</a>
@@ -77,10 +77,10 @@
                     <li>
                         <ul class="contlistnews">
                             <div class="lilistnews row">
-                                <div *ngFor="let item of newssidelist2;let i=index">
+                                <div *ngFor="let item of newssidelist2 | slice:0:3;let i=index">
                                     <div class="lilistnews row">
                                         <div class="col-4 mx-my-0 mt-3" *ngIf="item.thumbnail">
-                                            <a (click)="redirect(item.id)"><img [src]="item.thumbnail" height="100%" width="100%" style="max-height: 100px; width: 160px;"></a> 
+                                            <a (click)="redirect(item.id)"><img [src]="item.thumbnail" height="100%" width="100%" style="max-height: 100px; min-width: 100px; max-width: 130px;"></a> 
                                         </div>
                                         <div class="col-6 mx-my-0 mt-3">
                                             <a (click)="redirect(item.id)" class="listnews">{{item.title}}</a>

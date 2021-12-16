@@ -52,8 +52,8 @@ export class AdminCategoryComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
   ngOnInit(): void {
-    this.getCategoriesFromService()
     this.getNewsFromService()
+    this.getCategoriesFromService()
   }
   add(name:string,code:string){
     name = name.trim();
