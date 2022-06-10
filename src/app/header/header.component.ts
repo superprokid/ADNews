@@ -4,6 +4,7 @@ import { Categories } from 'src/models/categories';
 import { CategoriesService } from '../categories.service';
 import { NewsService } from '../news.service';
 import { Router } from '@angular/router';
+import { APIService } from '../signin.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -23,7 +24,8 @@ export class HeaderComponent implements OnInit {
   constructor(private modalService:NgbModal,
     private categoriesService:CategoriesService,
     private router:Router,
-    private newsService:NewsService
+    private newsService: NewsService,
+    private apiService: APIService
     ) { }
   openLogin(content:any) {
     this.modalService.open(content, { centered: true });
@@ -52,8 +54,23 @@ export class HeaderComponent implements OnInit {
  logOut(){
     this.login=false
  }
- logIn(){
-  this.router.navigate([`/admin`]);
+ logIn(username: string, password: string) {
+    let body = {
+      "username": username,
+      "password": password
+    }
+    this.apiService.signIn(body).subscribe((response) => {
+      sessionStorage.setItem("token", response.accessToken)
+      if (response.roles[0] == 'ROLE_ADMIN') {
+        this.router.navigate([`/admin`]);
+      }
+      else {
+        this.modalService.dismissAll()
+      }
+    }, error => {
+      alert("Sai mật khẩu")
+    }
+   )
   } 
   search(){
     console.log(this.searchValue)

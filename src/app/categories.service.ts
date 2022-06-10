@@ -7,15 +7,18 @@ import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { HttpParams } from '@angular/common/http';
 
 const httpOptions = {
-  headers: new HttpHeaders({"Content-Type": "application/json"})
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    "Authorization": 'Bearer ' + sessionStorage.getItem("token")
+  })
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesService {
-  private URL="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/categories";
-  private URLdetail="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/category";
+  private URL="http://localhost:8081/categories";
+  private URLdetail="http://localhost:8081/category";
   getCategories(): Observable<Categories[]>{
     return this.http.get<Categories[]>(this.URL).pipe(
       tap(receivedNews => console.log(`receivedNews = ${JSON.stringify(receivedNews)}`)),

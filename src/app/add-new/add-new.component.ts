@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { News } from 'src/models/news';
 import { Location } from '@angular/common';
 import { NewsService } from '../news.service';
 import { Categories } from 'src/models/categories';
 import { CategoriesService } from '../categories.service';
 import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-add-new',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-new.component.css','./sidebar.css']
 })
 export class AddNewComponent implements OnInit {
+  cate_code = ""
   categorieslist: Categories[] = [];
   check = false;
   selectedFile?: any;
@@ -25,7 +27,8 @@ export class AddNewComponent implements OnInit {
     private router:Router,
     private newsService:NewsService,
     private location:Location,
-    private categoriesService:CategoriesService,
+    private categoriesService: CategoriesService,
+    @Inject(DOCUMENT) public document: Document
   ) { }
 
   ngOnInit(): void {
@@ -53,11 +56,11 @@ export class AddNewComponent implements OnInit {
       this.preview = event.target!.result;
     }
   }
-  add(title:string,content:string,shortDescription:string,categoryCode:string){
+  add(title:string,content:string,shortDescription:string){
     title = title.trim();
     content = content.trim();
     shortDescription = shortDescription.trim();
-    categoryCode = categoryCode.trim();
+    let categoryCode = this.cate_code;
 
     if(!title || !content || !shortDescription || !categoryCode){
       alert("Không được để trống");

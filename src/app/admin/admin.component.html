@@ -1,155 +1,321 @@
 <app-header-admin></app-header-admin>
 <ng-template #content let-modal>
-    <nav ngbNav #nav="ngbNav" class="nav-tabs">
-      <ng-container ngbNavItem>
-        <a ngbNavLink class="d-flex justify-content-center" style="width: 100%; font-size: 20px;">Sửa</a>
-          <ng-template ngbNavContent >
-              <table>
-                <tr>
-                  <td>Tên bài viết</td>
-                  <td><input #newtitle placeholder="title"></td>
-                </tr>
-                <tr>
-                  <td>Tóm tắt</td>
-                  <td><input #newshortDescription placeholder="Tóm tắt"></td>
-                </tr>
-                <tr>
-                  <td>Nội dung</td>
-                  <td class="md-form">
-                    <textarea type="text" id="form7" class="md-textarea form-control" #newcontent mdbInput></textarea>
-                    <label for="form7"></label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>thumbnail</td>
-                  <td><input #newthumbnail placeholder="thumbnail"></td>
-                </tr>
-                <tr>
-                  <td>Code thể loại</td>
-                  <td><input #newcategoryCode placeholder="Code thể loại"></td>
-                </tr>
-                <button (click)="add(newtitle.value,newcontent.value,newshortDescription.value,newcategoryCode.value,newthumbnail.value);
-                newtitle.value='';newshortDescription.value='';newcontent.value='';newcategoryCode.value='';newthumbnail.value=''">Add</button>
-              </table>
-        </ng-template>
-    </ng-container>
-    </nav>
-    <div [ngbNavOutlet]="nav" class="mt-2"></div>
-  </ng-template>
+	<nav ngbNav #nav="ngbNav" class="nav-tabs">
+		<ng-container ngbNavItem>
+			<a
+				ngbNavLink
+				class="d-flex justify-content-center"
+				style="width: 100%; font-size: 20px"
+				>Sửa</a
+			>
+			<ng-template ngbNavContent>
+				<table>
+					<tr>
+						<td>Tên bài viết</td>
+						<td><input #newtitle placeholder="title" /></td>
+					</tr>
+					<tr>
+						<td>Tóm tắt</td>
+						<td>
+							<input #newshortDescription placeholder="Tóm tắt" />
+						</td>
+					</tr>
+					<tr>
+						<td>Nội dung</td>
+						<td class="md-form">
+							<textarea
+								type="text"
+								id="form7"
+								class="md-textarea form-control"
+								#newcontent
+								mdbInput
+							></textarea>
+							<label for="form7"></label>
+						</td>
+					</tr>
+					<tr>
+						<td>thumbnail</td>
+						<td><input #newthumbnail placeholder="thumbnail" /></td>
+					</tr>
+					<tr>
+						<td>Code thể loại</td>
+						<td>
+							<input #newcategoryCode placeholder="Code thể loại" />
+						</td>
+					</tr>
+					<button
+						(click)="
+							add(
+								newtitle.value,
+								newcontent.value,
+								newshortDescription.value,
+								newcategoryCode.value,
+								newthumbnail.value
+							);
+							newtitle.value = '';
+							newshortDescription.value = '';
+							newcontent.value = '';
+							newcategoryCode.value = '';
+							newthumbnail.value = ''
+						"
+					>
+						Add
+					</button>
+				</table>
+			</ng-template>
+		</ng-container>
+	</nav>
+	<div [ngbNavOutlet]="nav" class="mt-2"></div>
+</ng-template>
 
-  <div class="wrapper">
-    <!-- Sidebar Holder -->
-    <nav id="sidebar" class="active">
-  
-    <ul class="list-unstyled components">
-    <li>
-    <a routerLink="/home" aria-expanded="false">
-    <i class="fa fa-home"></i>
-    Home
-    </a>
-    </li>
-    <li class="active">
-    <a routerLink="/admin" aria-expanded="false" class="active">
-    <i class="fa fa-file"></i>
-    Quản lý bài viết
-    </a>
-    </li>
-    <li>
-      <a routerLink="/admin-category" aria-expanded="false">
-      <i class="fa fa-layer-group"></i>
-      Quản lý danh mục
-      </a>
-      </li>
-    <li>
-      <a href="#userSubmenu"aria-expanded="false">
-      <i class="fa fa-user"></i>
-      Quản lý User
-      </a>
-      <ul class="collapse list-unstyled" id="userSubmenu">
-      <li><a href="#">Tất cả User</a></li>
-      <li><a href="#">Theo Role</a></li>
-      </ul>
-      </li>
-    </ul>
-    </nav>
-    
-    <!-- Page Content Holder -->
-    <div id="content" style="width:100%">
-        <nav class="navbar navbar-default">
-          <div class="row">
-            <div class="col-md-12 mx-my-0 ml-auto">
-                <b style="font-size: 20px;">Quản lý bài viết </b>
-            </div>
-          </div>
-            <div class="pull-left">
-              <button class="btn btn-white btn-info btn-bold" data-toggle="tooltip" title="Thêm bài viết" (click)="openAdd()">
-                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-              </button>
-              <button class="btn btn-white btn-warning btn-bold" data-toggle="tooltip" title="Xóa bài viết" (click)="deltemultiple()">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
-            </div>
-        </nav>
-        <div class="d-flex ">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="list-group">
-                <button
-                type="button"
-                class="list-group-item list-group-item-action" [class.active]="activeclass === 0" (click)="onClickActiveAll()" 
-                aria-current="true"
-              >
-                Tất cả bài viết
-              </button>
-              <div *ngFor="let item of categorieslist;index as i">
-                <button type="button" class="list-group-item list-group-item-action" [class.active]="activeclass === i+1" (click)="onClickActive(i+1,item.id!)">
-                  {{item.name}}
-                </button>
-              </div>
-              </div>
-            </div>          
-            <!-- <button type="button" class="list-group-item list-group-item-action" [class.active]="activeclass === 1" (click)="onClickActive(1)">
+<div class="wrapper">
+	<!-- Sidebar Holder -->
+	<nav id="sidebar" class="active">
+		<ul class="list-unstyled components">
+			<li>
+				<a routerLink="/home" aria-expanded="false">
+					<i class="fa fa-home"></i>
+					Home
+				</a>
+			</li>
+			<li class="active">
+				<a routerLink="/admin" aria-expanded="false" class="active">
+					<i class="fa fa-file"></i>
+					Quản lý bài viết
+				</a>
+			</li>
+			<li>
+				<a routerLink="/admin-category" aria-expanded="false">
+					<i class="fa fa-layer-group"></i>
+					Quản lý danh mục
+				</a>
+			</li>
+			<li>
+				<a href="#userSubmenu" aria-expanded="false">
+					<i class="fa fa-user"></i>
+					Quản lý User
+				</a>
+				<ul class="collapse list-unstyled" id="userSubmenu">
+					<li><a href="#">Tất cả User</a></li>
+					<li><a href="#">Theo Role</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+
+	<!-- Page Content Holder -->
+	<div id="content" style="width: 100%">
+		<nav class="navbar navbar-default">
+			<div class="row">
+				<div class="col-md-12 mx-my-0 ml-auto">
+					<b style="font-size: 20px">Quản lý bài viết </b>
+				</div>
+			</div>
+		</nav>
+		<fieldset class="add_new_title mb-4">
+			<legend style="width: auto; margin: 0 1vw">
+				<i class="fa fa-search" aria-hidden="true"></i> TÌM KIẾM
+			</legend>
+			<div class="row">
+				<div class="col-sm-1 text-center mt-2"><b>Từ khóa:</b></div>
+				<div class="col-sm-4">
+					<input
+						type="text"
+						class="form-control"
+						placeholder="--Nhập từ khóa tìm kiếm--"
+						[(ngModel)]="searchValue"
+					/>
+				</div>
+				<div class="col-sm-1 text-center mt-2"><b>Danh mục:</b></div>
+				<div class="col-sm-4">
+					<select
+						class="form-control editcont"
+						name="status"
+						[(ngModel)]="selectedCate"
+					>
+						<option value=""></option>
+						<option
+							*ngFor="let item of categorieslist; index as i"
+							[value]="item.id"
+						>
+							{{ item.name }}
+						</option>
+					</select>
+				</div>
+				<div class="col-sm-2">
+					<button
+						type="button"
+						class="form-control btn btn-primary"
+						(click)="search()"
+					>
+						TÌM KIẾM
+					</button>
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset class="add_new_title">
+			<legend style="width: auto; margin: 0 1vw">
+				<i class="fa fa-th-large" aria-hidden="true"></i>
+				DANH SÁCH TIN TỨC
+			</legend>
+			<div class="d-flex flex-row-reverse">
+				<button
+					style="background-color: #00ff1a"
+					class="btn btn-white btn-success btn-bold edit_btn"
+					data-toggle="tooltip"
+					(click)="openAdd()"
+				>
+					<i class="fa fa-plus" aria-hidden="true"> Thêm mới</i>
+				</button>
+				<button
+					style="margin-right: 5vh"
+					class="btn btn-white btn-danger btn-bold edit_btn"
+					data-toggle="tooltip"
+					(click)="changeStatus(0)"
+				>
+					<i class="fa fa-eye-slash" aria-hidden="true">
+						Dừng hiển thị</i
+					>
+				</button>
+
+				<button
+					style="margin-right: 5vh"
+					class="btn btn-white btn-primary btn-bold edit_btn"
+					data-toggle="tooltip"
+					(click)="changeStatus(1)"
+				>
+					<i class="fa fa-eye" aria-hidden="true"> Hiển thị</i>
+				</button>
+			</div>
+
+			<div
+				class="row item_card"
+				*ngFor="let item of newlist; index as i"
+			>
+				<div class="col-md-1 center row_item card_checkbox">
+					<div>
+						<input type="checkbox" (change)="count($event, item.id!)" />
+					</div>
+				</div>
+				<a
+					class="col-md-2 row_item"
+					routerLink="/edit-new/{{ item.id }}"
+				>
+					<img
+						[src]="item.thumbnail"
+						height="100%"
+						width="100%"
+						alt=""
+					/>
+				</a>
+				<div class="col-md-9 row_item">
+					<div class="card_title">
+						{{ item.title }}
+					</div>
+					<div class="card_author">An Bốc Phét</div>
+					<div class="card_description">
+						{{ item.shortDescription }}
+					</div>
+					<div class="col-sm-10" *ngIf="item.status == 1">
+						<button type="button" class="btn btn-success text-center">
+							Đang hiển thị
+						</button>
+					</div>
+					<div class="col-sm-10" *ngIf="item.status == 0">
+						<button type="button" class="btn btn-danger text-center">
+							Không hiển thị
+						</button>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<div class="d-flex">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="list-group">
+						<button
+							type="button"
+							class="list-group-item list-group-item-action"
+							[class.active]="activeclass === 0"
+							(click)="onClickActiveAll()"
+							aria-current="true"
+						>
+							Tất cả bài viết
+						</button>
+						<div *ngFor="let item of categorieslist; index as i">
+							<button
+								type="button"
+								class="list-group-item list-group-item-action"
+								[class.active]="activeclass === i + 1"
+								(click)="onClickActive(i + 1, item.id!)"
+							>
+								{{ item.name }}
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-- <button type="button" class="list-group-item list-group-item-action" [class.active]="activeclass === 1" (click)="onClickActive(1)">
               Thể thao
             </button>
             <button type="button" class="list-group-item list-group-item-action" [class.active]="activeclass === 2" (click)="onClickActive(2)">
               Chính trị
             </button> -->
-            <div class="col-md-9">
-              <table border="2" class="newstable">
-                <thead>
-                  <tr class="text-center">
-                    <th class="p-2"><input type="checkbox" [(ngModel)]="contcheck" (change)="countall($event)"></th>
-                    <th class="p-2" scope="col">Title</th>
-                    <th class="p-2" scope="col">Short Description</th>
-                    <th class="p-2" scope="col">category-code</th>
-                    <th class="p-2" scope="col" style="width:100px">Edit</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of newlist; index as i">
-                    <th class="p-2"><input type="checkbox" [checked]="contcheck" (change)="count($event,item.id!)"></th>
-                    <th class="itemcont p-2">{{item.title}}</th>
-                    <th class="itemcont p-2">{{item.shortDescription}}</th>
-                    <th class="itemcont p-2">{{item.categoryCode}}</th>
-                    <th class="p-2">  
-                      <a routerLink="/edit-new/{{item.id}}"><img src="assets\images\sua.png" width="50%"></a>
-                      <a (click)="delete(item.id!)"><img src="assets\images\xoa.png" width="50%"></a>
-                  </th>
-                  </tr>
-                </tbody>
-            </table>
-            </div>
-          </div>       
-        </div>
-      </div>
-    </div>
-  
-  <!-- <button (click)="Delete()">Delete</button> -->
-  
-  <!-- {{transfer[0]}} --- {{transfer[1]}} -->
-  
-  
-      <!-- <li ngbNavItem="middle">
+				<div class="col-md-9">
+					<table border="2" class="newstable">
+						<thead>
+							<tr class="text-center">
+								<th class="p-2">
+									<input
+										type="checkbox"
+										[(ngModel)]="contcheck"
+										(change)="countall($event)"
+									/>
+								</th>
+								<th class="p-2" scope="col">Title</th>
+								<th class="p-2" scope="col">Short Description</th>
+								<th class="p-2" scope="col">category-code</th>
+								<th class="p-2" scope="col" style="width: 100px">
+									Edit
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let item of newlist; index as i">
+								<th class="p-2">
+									<input
+										type="checkbox"
+										[checked]="contcheck"
+										(change)="count($event, item.id!)"
+									/>
+								</th>
+								<th class="itemcont p-2">{{ item.title }}</th>
+								<th class="itemcont p-2">
+									{{ item.shortDescription }}
+								</th>
+								<th class="itemcont p-2">{{ item.categoryCode }}</th>
+								<th class="p-2">
+									<a routerLink="/edit-new/{{ item.id }}"
+										><img src="assets\images\sua.png" width="50%"
+									/></a>
+									<a (click)="delete(item.id!)"
+										><img src="assets\images\xoa.png" width="50%"
+									/></a>
+								</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <button (click)="Delete()">Delete</button> -->
+
+<!-- {{transfer[0]}} --- {{transfer[1]}} -->
+
+<!-- <li ngbNavItem="middle">
           <a ngbNavLink>Quản lý nhân viên</a>
           <ng-template ngbNavContent>
               <table class="table table-striped">

@@ -1,4 +1,4 @@
-import { Component, OnInit, PipeTransform } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -30,15 +30,23 @@ export class AdminComponent implements OnInit {
   filter = new FormControl('');
   check = false;
   show = true
+  base64Data: any
+  searchValue = ''
+  selectedCate = ''
   constructor(private modalService:NgbModal,
     private newsService:NewsService,
     private categoriesService:CategoriesService,
     private router:Router) {
   }
+  @Input() CateTranster!:number
   getNewsFromService():void{
     this.newsService.getNews().subscribe(
       (updatedNews) => {
         this.newlist = updatedNews;
+        for(let i=0;i<this.newlist.length;i++){
+          this.base64Data = this.newlist[i].thumbnail
+          this.newlist[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
+        }
         console.log(`this.categorieslist = ${JSON.stringify(this.newlist)}`);
       }
     )
@@ -58,8 +66,14 @@ export class AdminComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.getNewsFromService();
     this.getCategoriesFromService();
+    if (this.CateTranster != undefined) {
+      this.selectedCate = this.CateTranster.toString()
+      this.search()
+    }
+    else {
+      this.getNewsFromService();
+    }
   }
 
   add(title:string,content:string,shortDescription:string,categoryCode:string,thumbnail:string){
@@ -142,8 +156,65 @@ export class AdminComponent implements OnInit {
       }
     )
   }
+  changeStatus(status: number) {
+    let body = {
+      id: this.idcont,
+      status : status
+    }
+    this.newsService.updateStatus(body).subscribe(()=>this.getNewsFromService())
+  }
   onClickActiveAll(){
     this.activeclass = 0;
     this.getNewsFromService();
+  }
+  search() {
+    if (this.searchValue != '' && this.selectedCate !='') {
+      this.newsService.getNewWithSearch(this.searchValue).subscribe(
+        (searchNews) => {
+          let tempList: News[] = []
+          this.newsService.getNewWithCategory(parseInt(this.selectedCate)).subscribe(
+            (categoryNews) => {
+              for (let i = 0; i < searchNews.length; i++){
+                for (let j = 0; j < categoryNews.length; j++){
+                  if (searchNews[i].id == categoryNews[j].id) {
+                    tempList[tempList.length] = searchNews[i]
+                  }
+                }
+              }
+              this.newlist = tempList
+            for(let i=0;i<this.newlist.length;i++){
+              this.base64Data = this.newlist[i].thumbnail
+              this.newlist[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
+            }
+            }
+          )
+        }
+      )
+    }
+    else if(this.searchValue == '' && this.selectedCate !=''){
+      this.newsService.getNewWithCategory(parseInt(this.selectedCate)).subscribe(
+        (updatedNews) => {
+          this.newlist = updatedNews;
+          for(let i=0;i<this.newlist.length;i++){
+            this.base64Data = this.newlist[i].thumbnail
+            this.newlist[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
+          }
+        }
+      )
+    }
+    else if (this.searchValue != '' && this.selectedCate == '') {
+      this.newsService.getNewWithSearch(this.searchValue).subscribe(
+        (updatedNews) => {
+          this.newlist = updatedNews
+          for(let i=0;i<this.newlist.length;i++){
+            this.base64Data = this.newlist[i].thumbnail
+            this.newlist[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
+          }
+        }
+      )
+    }
+    else {
+      this.getNewsFromService()
+    }
   }
 }

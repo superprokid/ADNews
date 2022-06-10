@@ -1,111 +1,457 @@
 <app-header-admin></app-header-admin>
 <ng-template #content let-modal>
-    <nav ngbNav #nav="ngbNav" class="nav-tabs">
-      <ng-container ngbNavItem>
-        <a ngbNavLink class="d-flex justify-content-center" style="width: 100%; font-size: 20px;">Thêm</a>
-          <ng-template ngbNavContent >
-              <table>
-                <tr>
-                  <td>Tên thể loại</td>
-                  <td><input #categoryTitle placeholder="Tên"></td>
-                </tr>
-                <tr>
-                  <td>Code thể loại</td>
-                  <td><input #categoryCode placeholder="Code"></td>
-                </tr>
-                <button (click)="add(categoryTitle.value,categoryCode.value);
-                categoryTitle.value='';categoryCode.value=''">Add</button>
-              </table>
-        </ng-template>
-    </ng-container>
-    </nav>
-    <div [ngbNavOutlet]="nav" class="mt-2"></div>
-  </ng-template>
-<div class="wrapper">
-  <!-- Sidebar Holder -->
-  <nav id="sidebar" class="active">
+	<nav ngbNav #nav="ngbNav" class="nav-tabs">
+		<ng-container ngbNavItem>
+			<a ngbNavLink class="d-flex justify-content-center add_title"
+				><i class="fa fa-plus"></i> Thêm</a
+			>
+			<ng-template ngbNavContent>
+				<table class="add_table">
+					<tr>
+						<td class="edittitle"><b>Tên danh mục:</b></td>
+						<td><input class="editcont" #categoryTitle /></td>
+					</tr>
+					<tr>
+						<td class="edittitle"><b>Mã danh mục:</b></td>
+						<td>
+							<input
+								class="editcont"
+								#categoryCode
+								placeholder="--Nhập tên danh mục--"
+							/>
+						</td>
+					</tr>
 
-  <ul class="list-unstyled components">
-  <li>
-  <a routerLink="/home" aria-expanded="false">
-  <i class="fa fa-home"></i>
-  Home
-  </a>
-  </li>
-  <li>
-  <a routerLink="/admin" aria-expanded="false" class="active">
-  <i class="fa fa-file"></i>
-  Quản lý bài viết
-  </a>
-  </li>
-  <li class="active">
-    <a routerLink="/admin-category" aria-expanded="false">
-    <i class="fa fa-layer-group"></i>
-    Quản lý danh mục
-    </a>
-    </li>
-  <li>
-    <a href="#userSubmenu" aria-expanded="false">
-    <i class="fa fa-user"></i>
-    Quản lý User
-    </a>
-    <ul class="collapse list-unstyled" id="userSubmenu">
-    <li><a href="#">Tất cả User</a></li>
-    <li><a href="#">Theo Role</a></li>
-    </ul>
-    </li>
-  </ul>
-  </nav>
-  
-  <!-- Page Content Holder -->
-  <div id="content" style="width:100%">
-      <nav class="navbar navbar-default">
-        <div class="row">
-          <div class="col-md-12 mx-my-0 ml-auto">
-              <b style="font-size: 20px;">Quản lý bài viết </b>
-          </div>
-        </div>
-          <div class="pull-left">
-            <button class="btn btn-white btn-info btn-bold" data-toggle="tooltip" title="Thêm bài viết" (click)="openAdd(content)">
-              <i class="fa fa-plus-circle" aria-hidden="true"></i>
-            </button>
-            <button class="btn btn-white btn-warning btn-bold" data-toggle="tooltip" title="Xóa bài viết" (click)="deltemultiple()">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
-          </div>
-      </nav>
-      <div class="d-flex ">
-            <table border="2" class="newstable">
-              <thead>
-                <tr class="text-center">
-                  <th class="p-2"><input type="checkbox" [(ngModel)]="contcheck" (change)="countall($event)"></th>
-                  <th class="p-2" scope="col">Category Name</th>
-                  <th class="p-2" scope="col">category-code</th>
-                  <th class="p-2" scope="col" style="width:100px">Edit</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of categorieslist; index as i">
-                  <th class="p-2"><input type="checkbox" [checked]="contcheck" (change)="count($event,item.id!)"></th>
-                  <th class="itemcont p-2">{{item.name}}</th>
-                  <th class="itemcont p-2">{{item.code}}</th>
-                  <th class="p-2">  
-                    <a routerLink="/edit-category/{{item.id}}"><img src="assets\images\sua.png" width="50%"></a>
-                    <a (click)="delete(item.id!)"><img src="assets\images\xoa.png" width="50%"></a>
-                </th>
-                </tr>
-              </tbody>
-          </table>
-      </div>
-    </div>
-  </div>
+					<!-- <button
+						(click)="
+							add(categoryTitle.value, categoryCode.value);
+							categoryTitle.value = '';
+							categoryCode.value = ''
+						"
+					>
+						Add
+					</button> -->
+				</table>
+				<div style="width: 100%">
+					<button
+						class="btn btn-white btn-primary btn-bold edit_btn"
+						data-toggle="tooltip"
+						(click)="
+							add(categoryTitle.value, categoryCode.value);
+							categoryTitle.value = '';
+							categoryCode.value = ''
+						"
+					>
+						<i class="fa fa-save" aria-hidden="true"> Lưu cập nhập</i>
+					</button>
+					<button
+						style="margin-right: 5vh"
+						class="btn btn-white btn-danger btn-bold edit_btn"
+						data-toggle="tooltip"
+						title="Xóa bài viết"
+					>
+						<i class="fa fa-x" aria-hidden="true"> Đóng</i>
+					</button>
+				</div>
+			</ng-template>
+		</ng-container>
+	</nav>
+	<div [ngbNavOutlet]="nav" class="mt-2"></div>
+</ng-template>
+<div class="wrapper">
+	<!-- Sidebar Holder -->
+	<nav id="sidebar" class="active">
+		<ul class="list-unstyled components">
+			<li>
+				<a routerLink="/home" aria-expanded="false">
+					<i class="fa fa-home"></i>
+					Home
+				</a>
+			</li>
+			<li>
+				<a routerLink="/admin" aria-expanded="false">
+					<i class="fa fa-file"></i>
+					Quản lý bài viết
+				</a>
+			</li>
+			<li class="active">
+				<a routerLink="/admin-category" aria-expanded="false">
+					<i class="fa fa-layer-group"></i>
+					Quản lý danh mục
+				</a>
+			</li>
+			<li>
+				<a href="#userSubmenu" aria-expanded="false">
+					<i class="fa fa-user"></i>
+					Quản lý User
+				</a>
+				<ul class="collapse list-unstyled" id="userSubmenu">
+					<li><a href="#">Tất cả User</a></li>
+					<li><a href="#">Theo Role</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+
+	<!-- Page Content Holder -->
+	<div id="content" style="width: 100%">
+		<!-- <nav class="navbar navbar-default">
+			<div class="row">
+				<div class="col-md-12 mx-my-0 ml-auto">
+					<b style="font-size: 20px">Quản lý bài viết </b>
+				</div>
+			</div>
+			<div class="pull-left">
+				<button
+					class="btn btn-white btn-info btn-bold"
+					data-toggle="tooltip"
+					title="Thêm bài viết"
+					(click)="openAdd(content)"
+				>
+					<i class="fa fa-plus-circle" aria-hidden="true"></i>
+				</button>
+				<button
+					class="btn btn-white btn-warning btn-bold"
+					data-toggle="tooltip"
+					title="Xóa bài viết"
+					(click)="deltemultiple()"
+				>
+					<i class="fa fa-trash" aria-hidden="true"></i>
+				</button>
+			</div>
+		</nav> -->
+
+		<fieldset class="add_new_title mb-4">
+			<legend style="width: auto; margin: 0 1vw">
+				<i class="fa fa-search" aria-hidden="true"></i> TÌM KIẾM
+			</legend>
+			<div class="row">
+				<div class="col-sm-1 text-center mt-2">Danh mục:</div>
+				<div class="col-sm-9">
+					<div class="form-group">
+						<select
+							class="form-control editcont"
+							name="status"
+							[(ngModel)]="selectedValue"
+							(change)="editCate()"
+						>
+							<option
+								*ngFor="let item of categorieslist; index as i"
+								[value]="item.code"
+							>
+								{{ item.name }}
+							</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<button
+						type="button"
+						class="form-control btn btn-success"
+						(click)="openAdd(content)"
+					>
+						THÊM
+					</button>
+				</div>
+			</div>
+		</fieldset>
+		<br />
+
+		<fieldset class="add_new_title">
+			<legend style="width: auto; margin: 0 1vw">
+				<i class="fa fa-th-large" aria-hidden="true"></i>
+				THÔNG TIN DANH MỤC
+			</legend>
+			<!-- <div style="width: 100%">
+				<div class="col-sm-2" style="width: 100%; float: right">
+					<button
+						type="button"
+						class="form-control btn btn-primary"
+						(click)="openAdd(content)"
+					>
+						THÊM
+					</button>
+				</div>
+			</div> -->
+			<div class="row" style="margin-top: 20px; width: auto">
+				<!-- <div class="col-sm-5">
+					<table class="table table-bordered" id="category_table">
+						<thead>
+							<tr>
+								<th
+									class="text-center"
+									style="background-color: #197ff1; color: white"
+								>
+									Mã danh mục
+								</th>
+								<th
+									class="text-center"
+									style="background-color: #197ff1; color: white"
+								>
+									Tên danh mục
+								</th>
+								<th
+									class="text-center"
+									style="background-color: #197ff1; color: white"
+								>
+									Trạng thái
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let item of categorieslist; index as i">
+								<td
+									class="text-center item_value"
+									style="color: #197ff1; vertical-align: middle"
+								>
+									{{ item.code }}
+								</td>
+								<td
+									class="text-center item_value"
+									style="
+										color: #197ff1;
+										cursor: pointer;
+										vertical-align: middle;
+									"
+									(click)="editCate(item, i)"
+								>
+									<ins>{{ item.name }}</ins>
+								</td>
+								<td
+									class="text-center item_value"
+									*ngIf="item.status == 1"
+								>
+									<button type="button" class="btn btn-success">
+										Đang hiển thị
+									</button>
+								</td>
+								<td
+									class="text-center item_value"
+									*ngIf="item.status == 0"
+								>
+									<button type="button" class="btn btn-danger">
+										Không hiển thị
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1" style="margin-bottom: 1rem">
+					<div
+						class="text-center"
+						style="
+							width: 100%;
+							height: 100%;
+							background-color: lightgray;
+							/* vertical-align: middle; */
+							display: flex;
+							justify-content: center;
+							align-items: center;
+						"
+					>
+						<i class="fa fa-arrow-right" aria-hidden="true"></i>
+					</div>
+				</div> -->
+
+				<div class="col-sm-6" *ngIf="category">
+					<div class="row">
+						<table class="table table-borderless">
+							<!-- <thead>
+								<tr style="background-color: #197ff1; color: white">
+									<th scope="col">
+										<i class="fa fa-info-circle" aria-hidden="true"></i>
+										Thông tin danh mục
+									</th>
+								</tr>
+							</thead> -->
+							<tbody>
+								<tr>
+									<th>
+										<div class="row">
+											<div class="col-sm-2 mt-1">Mã danh mục:</div>
+											<div class="col-sm-10">
+												<input
+													type="text"
+													style="width: 100%"
+													[(ngModel)]="category.code"
+												/>
+											</div>
+										</div>
+									</th>
+								</tr>
+								<tr>
+									<th>
+										<div class="row">
+											<div class="col-sm-2 mt-1">Tên danh mục:</div>
+											<div class="col-sm-10">
+												<input
+													type="text"
+													style="width: 100%"
+													[(ngModel)]="category.name"
+												/>
+											</div>
+										</div>
+									</th>
+								</tr>
+								<tr>
+									<th>
+										<div class="row">
+											<div class="col-sm-2 mt-1">Số lượng tin tức:</div>
+											<div class="col-sm-1 mt-1">{{ number_news }}</div>
+											<div class="col-sm-9">
+												<button
+													style="float: right"
+													type="button"
+													class="btn btn-primary"
+												>
+													Danh sách tin tức
+													<i
+														class="fa fa-arrow-right"
+														aria-hidden="true"
+													></i>
+												</button>
+											</div>
+										</div>
+									</th>
+								</tr>
+								<tr>
+									<th>
+										<div class="row">
+											<div class="col-sm-2">Trạng thái:</div>
+											<div
+												class="col-sm-10"
+												*ngIf="category.status == 1"
+											>
+												<button
+													type="button"
+													class="btn btn-success text-center"
+												>
+													Đang hiển thị
+												</button>
+											</div>
+											<div
+												class="col-sm-10"
+												*ngIf="category.status == 0"
+											>
+												<button
+													type="button"
+													class="btn btn-danger text-center"
+												>
+													Không hiển thị
+												</button>
+											</div>
+										</div>
+									</th>
+								</tr>
+								<tr>
+									<th>
+										<div class="row">
+											<div class="col-sm-12">
+												<div style="float: right">
+													<button
+														*ngIf="category.status == 1"
+														type="button"
+														class="btn btn-success mr-2"
+														(click)="category.status = 0"
+													>
+														<i class="fa fa-eye" aria-hidden="true"></i
+														>Hiển thị
+													</button>
+													<button
+														*ngIf="category.status == 0"
+														type="button"
+														class="btn btn-danger mr-2"
+														(click)="category.status = 1"
+													>
+														<i
+															class="fa fa-eye-slash"
+															aria-hidden="true"
+														></i
+														>Dừng hiển thị
+													</button>
+													<button
+														type="button"
+														class="btn btn-danger mr-2"
+														(click)="goBack()"
+													>
+														<i
+															class="fa fa-times-circle"
+															aria-hidden="true"
+														></i>
+														Đóng
+													</button>
+													<button
+														type="button"
+														(click)="saveCate()"
+														class="btn btn-primary"
+													>
+														<i
+															class="fa fa-floppy-o"
+															aria-hidden="true"
+														></i
+														>Lưu cập nhật
+													</button>
+												</div>
+											</div>
+										</div>
+									</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+		<br />
+		<div class="d-flex">
+			<table border="2" class="newstable">
+				<thead>
+					<tr class="text-center">
+						<th class="p-2">
+							<input
+								type="checkbox"
+								[(ngModel)]="contcheck"
+								(change)="countall($event)"
+							/>
+						</th>
+						<th class="p-2" scope="col">Category Name</th>
+						<th class="p-2" scope="col">category-code</th>
+						<th class="p-2" scope="col" style="width: 100px">Edit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of categorieslist; index as i">
+						<th class="p-2">
+							<input
+								type="checkbox"
+								[checked]="contcheck"
+								(change)="count($event, item.id!)"
+							/>
+						</th>
+						<th class="itemcont p-2">{{ item.name }}</th>
+						<th class="itemcont p-2">{{ item.code }}</th>
+						<th class="p-2">
+							<a routerLink="/edit-category/{{ item.id }}"
+								><img src="assets\images\sua.png" width="50%"
+							/></a>
+							<a (click)="delete(item.id!)"
+								><img src="assets\images\xoa.png" width="50%"
+							/></a>
+						</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 
 <!-- <button (click)="Delete()">Delete</button> -->
 
 <!-- {{transfer[0]}} --- {{transfer[1]}} -->
 
-
-    <!-- <li ngbNavItem="middle">
+<!-- <li ngbNavItem="middle">
         <a ngbNavLink>Quản lý nhân viên</a>
         <ng-template ngbNavContent>
             <table class="table table-striped">
@@ -136,4 +482,3 @@
   
     <div [ngbNavOutlet]="nav" class="ml-4"></div>
   </div> -->
-

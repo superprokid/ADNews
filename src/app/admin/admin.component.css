@@ -1,12 +1,63 @@
-.editbtn{
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
-    border: none;
+.editbtn {
+	width: 30px;
+	height: 30px;
+	background-color: transparent;
+	border: none;
 }
-.itemcont{
-    font-weight: normal !important;
+.itemcont {
+	font-weight: normal !important;
 }
-.newstable{
-    margin: 0 auto;
+#content {
+	color: #197ff1;
+}
+#sidebar {
+	background-color: #4285f4 !important;
+	width: 7%;
+	max-width: 7% !important;
+}
+.newstable {
+	margin: 0 auto;
+}
+.add_new_title {
+	border: 3px solid #197ff1;
+	border-radius: 2%;
+	padding: 30px;
+	color: #197ff1;
+	margin-bottom: 2vh;
+}
+.edit_btn {
+	margin-top: 2vh;
+	color: white;
+	text-align: center;
+	width: 10vw;
+	height: 5vh;
+	margin-right: 1vw;
+	margin-bottom: 2vh;
+}
+.item_card {
+	height: 20vh;
+	margin-bottom: 2vh;
+	border: 1px solid #197ff1;
+}
+.row_item {
+	color: black;
+	height: 100%;
+	width: 100%;
+}
+.card_checkbox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.card_title {
+	padding-top: 1vh;
+	font-weight: bold;
+	font-size: larger;
+}
+.card_author {
+	margin: 2vh 0;
+	font-size: large;
+}
+.card_description {
+	color: grey;
 }

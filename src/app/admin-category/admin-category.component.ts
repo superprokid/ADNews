@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormControl } from '@angular/forms';
 
@@ -19,7 +19,8 @@ import { isNull } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./admin-category.component.css','./sidebar.css']
 })
 export class AdminCategoryComponent implements OnInit {
-  active='top'
+  active = 'top'
+  selectedValue:any
   contcheck=false
   idcount=0;
   idcont: number[] = [];
@@ -27,10 +28,12 @@ export class AdminCategoryComponent implements OnInit {
   categorieslist: Categories[] = [];
   newslist:News[] = [];
   filter = new FormControl('');
-  deleteCate?:Categories
+  deleteCate?: Categories;
+  category?: Categories;
+  number_news = 0;
   constructor(private modalService:NgbModal,
     private categoriesService:CategoriesService,
-    private newsService:NewsService) {
+    private newsService: NewsService) {
   }
   getCategoriesFromService():void{
     this.categoriesService.getCategories().subscribe(
@@ -55,6 +58,7 @@ export class AdminCategoryComponent implements OnInit {
     this.getNewsFromService()
     this.getCategoriesFromService()
   }
+
   add(name:string,code:string){
     name = name.trim();
     code = code.trim();
@@ -128,5 +132,38 @@ export class AdminCategoryComponent implements OnInit {
   activeclass?: number = 0;
   onClickActive(index: number) {
     this.activeclass = index;
+  }
+  changeStatus(num: number) {
+    this.category!.status = num
+  }
+  // editCate(cateEdit : Categories,index:number) {
+  //   this.category = cateEdit
+  //   let row = document.getElementsByClassName("item_value")
+  //   for (let i = 0; i < row.length; i++){
+  //     row[i].classList.add('disable')
+  //   }
+  // }
+  editCate() {
+    for (let i = 0; i < this.categorieslist.length; i++)
+      if (this.selectedValue == this.categorieslist[i].code) {
+        this.category = this.categorieslist[i]
+        break
+      }
+    this.newsService.getNewWithCategory(this.category?.id!).subscribe(response => this.number_news = response.length )
+  }
+  goBack() {
+    this.category = undefined
+    let row = document.getElementsByClassName("item_value")
+    for (let i = 0; i < row.length; i++){
+      row[i].classList.remove('disable')
+    }
+  }
+  saveCate() {
+    this.categoriesService.updateCategory(this.category!).subscribe();
+    this.category = undefined
+    let row = document.getElementsByClassName("item_value")
+    for (let i = 0; i < row.length; i++){
+      row[i].classList.remove('disable')
+    }
   }
 }

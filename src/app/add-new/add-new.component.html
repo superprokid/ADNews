@@ -1,89 +1,237 @@
 <app-header-admin></app-header-admin>
 <div class="wrapper">
-  <!-- Sidebar Holder -->
-  <nav id="sidebar" class="active">
+	<!-- Sidebar Holder -->
+	<nav id="sidebar" class="active">
+		<ul class="list-unstyled components">
+			<li>
+				<a href="#homeSubmenu" aria-expanded="false">
+					<i class="fa fa-home"></i>
+					Trang chủ
+				</a>
+			</li>
+			<li class="active">
+				<a routerLink="/admin" aria-expanded="false" class="active">
+					<i class="fa fa-file"></i>
+					Quản lý bài viết
+				</a>
+			</li>
+			<li>
+				<a routerLink="/admin-category" aria-expanded="false">
+					<i class="fa fa-layer-group"></i>
+					Quản lý danh mục
+				</a>
+			</li>
+			<li>
+				<a href="#userSubmenu" aria-expanded="false">
+					<i class="fa fa-user"></i>
+					Quản lý User
+				</a>
+				<ul class="collapse list-unstyled" id="userSubmenu">
+					<li><a href="#">Tất cả User</a></li>
+					<li><a href="#">Theo Role</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
 
-    <ul class="list-unstyled components">
-    <li>
-    <a href="#homeSubmenu" aria-expanded="false">
-    <i class="fa fa-home"></i>
-    Home
-    </a>
-    </li>
-    <li class="active">
-    <a routerLink="/admin" aria-expanded="false" class="active">
-    <i class="fa fa-file"></i>
-    Quản lý bài viết
-    </a>
-    </li>
-    <li>
-      <a routerLink="/admin-category" aria-expanded="false">
-      <i class="fa fa-layer-group"></i>
-      Quản lý danh mục
-      </a>
-      </li>
-    <li>
-      <a href="#userSubmenu"aria-expanded="false">
-      <i class="fa fa-user"></i>
-      Quản lý User
-      </a>
-      <ul class="collapse list-unstyled" id="userSubmenu">
-      <li><a href="#">Tất cả User</a></li>
-      <li><a href="#">Theo Role</a></li>
-      </ul>
-      </li>
-    </ul>
-    </nav>
-  
-  <!-- Page Content Holder -->
-  <div id="content" style="width:100%">
-      <nav class="navbar navbar-default">
-        <div class="row">
-          <div class="col-md-12 mx-my-0 ml-auto">
-              <b style="font-size: 20px;">Quản lý bài viết </b>
-          </div>
-        </div>
-        <div class="pull-left">
-          <button class="btn btn-white btn-info btn-bold" data-toggle="tooltip" title="Thêm bài viết" (click)="add(newtitle.value,newcontent.value,newshortDescription.value,newcategoryCode.value)">
-            <i class="fa fa-check" aria-hidden="true"></i>
-          </button>
-          <button class="btn btn-white btn-warning btn-bold" data-toggle="tooltip" title="Xóa bài viết" (click)="goBack()">
-            <i class="fa fa-undo" aria-hidden="true"></i>
-          </button>
-        </div>
-      </nav>
-      <table style="width: 100%;">
-        <tr>
-          <td class="edittitle">Tên bài viết</td>
-          <td><input #newtitle placeholder="title" class="editcont" ></td>
-        </tr>
-        <tr>
-          <td class="edittitle">Tóm tắt</td>
-          <td><input #newshortDescription placeholder="Tóm tắt" class="editcont"></td>
-        </tr>
-        <tr>
-          <td class="edittitle">Nội dung</td>
-          <td>
-            <textarea type="text" id="form7" class="md-textarea md-textarea-auto form-control" mdbInput #newcontent></textarea>
-            <label for="form7"></label>
-          </td>
-        </tr>
-        <!--  -->
-        <tr>
-          <td class="edittitle">thumbnail</td>
-          <td><input type="file" (change)="onFileChanged($event)" class="editcont" accept="image/png"></td>
-        </tr>
-        <tr>
-          <td class="edittitle">Preview</td>
-            <td *ngIf=preview>
-              <img [src]="preview" class="previewimg">
-            </td>
-        </tr>
-        <tr>
-          <td class="edittitle">Code thể loại</td>
-          <td><input #newcategoryCode placeholder="Code thể loại" class="editcont"></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
+	<!-- Page Content Holder -->
+	<div id="content" style="width: 100%">
+		<nav class="navbar navbar-default">
+			<div class="row">
+				<div class="col-md-12 mx-my-0 ml-auto">
+					<b style="font-size: 20px"
+						>Quản lý tin tức > Thêm mới tin tức
+					</b>
+				</div>
+			</div>
+		</nav>
+		<fieldset class="add_new_title">
+			<legend style="width: auto; margin: 0 1vw">
+				<i class="fa fa-plus"></i> THÊM TIN TỨC
+			</legend>
+			<fieldset style="margin: 3vh 1vw" class="add_new_title">
+				<legend style="width: auto; margin: 0 1vw">
+					THÔNG TIN TỔNG QUAN
+				</legend>
+				<table class="input_table">
+					<tr class="input_table_tr">
+						<td class="edittitle"><b>Danh mục:</b></td>
+						<td>
+							<div class="form-group">
+								<select
+									class="form-control editcont"
+									name="status"
+									[(ngModel)]="cate_code"
+								>
+									<option
+										*ngFor="let item of categorieslist; index as i"
+										[value]="item.code"
+									>
+										{{ item.name }}
+									</option>
+									<!-- <option [value]="0" [selected]="status == 0">
+										In Active
+									</option> -->
+								</select>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="edittitle"><b>Tiêu đề:</b></td>
+						<td>
+							<input
+								#newtitle
+								placeholder="--Nhập Tiêu Đề Tin Tức--"
+								class="editcont"
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td class="edittitle"><b>Tên tác giả:</b></td>
+						<td>
+							<input
+								placeholder="--Nhập Tên Tác Giả--"
+								class="editcont"
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td class="edittitle"><b>Thumbnail:</b></td>
+						<td>
+							<input
+								#newshortDescription
+								placeholder="--Chọn thumbnail--"
+								style="width: 85%"
+								class="editcont"
+							/>
+							<label class="addImage">
+								<input
+									type="file"
+									(change)="onFileChanged($event)"
+									accept="image/png"
+									style="width: 100%"
+								/>
+								<button
+									style="background-color: #00ff1a"
+									class="btn btn-white btn-success btn-bold file_btn"
+									data-toggle="tooltip"
+									(click)="
+										document.getElementById('image_input')!.click()
+									"
+								>
+									<i class="fa fa-image" aria-hidden="true">
+										Chọn tệp</i
+									>
+								</button>
+							</label>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+			<fieldset style="margin: 3vh 1vw" class="add_new_title">
+				<legend style="width: auto; margin: 0 1vw">
+					NỘI DUNG BÀI VIẾT
+				</legend>
+				<table class="input_table">
+					<tr>
+						<td class="edittitle">Nội dung</td>
+						<td>
+							<textarea
+								placeholder="--Nhập nội dung tin tức--"
+								type="text"
+								id="form7"
+								class="md-textarea md-textarea-auto form-control editcont"
+								mdbInput
+								#newcontent
+							></textarea>
+							<label for="form7"></label>
+						</td>
+					</tr>
+					<!--  -->
+					<tr>
+						<td class="edittitle"><b>Hình ảnh:</b></td>
+						<td>
+							<input
+								#newshortDescription
+								placeholder="--Chọn hình ảnh--"
+								style="width: 85%"
+								class="editcont"
+							/>
+							<label class="addImage">
+								<input
+									id="image_input"
+									type="file"
+									(change)="onFileChanged($event)"
+									accept="image/png"
+									style="width: 100%"
+								/>
+								<button
+									style="background-color: #00ff1a"
+									class="btn btn-white btn-success btn-bold file_btn"
+									data-toggle="tooltip"
+									(click)="
+										document.getElementById('image_input')!.click()
+									"
+								>
+									<i class="fa fa-image" aria-hidden="true">
+										Chọn tệp</i
+									>
+								</button>
+							</label>
+						</td>
+					</tr>
+				</table>
+				<button
+					style="margin-right: 5vh"
+					class="btn btn-white btn-danger btn-bold edit_btn"
+					data-toggle="tooltip"
+				>
+					<i class="fa fa-trash" aria-hidden="true"> Xóa</i>
+				</button>
+				<button
+					style="
+						margin-right: 5vh;
+						background-color: #00ff1a;
+						margin-bottom: 2vh;
+					"
+					class="btn btn-white btn-success btn-bold edit_btn"
+					data-toggle="tooltip"
+				>
+					<i class="fa fa-eye" aria-hidden="true"> Thêm mới</i>
+				</button>
+			</fieldset>
+		</fieldset>
+		<div style="margin-top: 3vh">
+			<button
+				class="btn btn-white btn-primary btn-bold edit_btn"
+				data-toggle="tooltip"
+				title="  bài viết"
+				(click)="
+					add(
+						newtitle.value,
+						newcontent.value,
+						newshortDescription.value
+					)
+				"
+			>
+				<i class="fa fa-save" aria-hidden="true"> Lưu cập nhập</i>
+			</button>
+			<button
+				style="margin-right: 5vh"
+				class="btn btn-white btn-danger btn-bold edit_btn"
+				data-toggle="tooltip"
+				title="Xóa bài viết"
+				(click)="goBack()"
+			>
+				<i class="fa fa-x" aria-hidden="true"> Đóng</i>
+			</button>
+			<button
+				style="margin-right: 5vh"
+				class="btn btn-white btn-warning btn-bold edit_btn"
+				data-toggle="tooltip"
+			>
+				<i class="fa fa-eye" aria-hidden="true"> Xem trước</i>
+			</button>
+		</div>
+	</div>
+</div>

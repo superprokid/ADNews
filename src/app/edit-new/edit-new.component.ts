@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Inject } from '@angular/core';
 import { News } from 'src/models/news';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -8,6 +8,7 @@ import { CategoriesService } from '../categories.service';
 import { Router } from '@angular/router';
 import { event } from 'jquery';
 import { ReadVarExpr } from '@angular/compiler';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-edit-new',
@@ -31,7 +32,8 @@ export class EditNewComponent implements OnInit {
     private newsService:NewsService,
     private location:Location,
     private categoriesService:CategoriesService,
-    private router:Router
+    private router: Router,
+    @Inject(DOCUMENT) public document: Document
   ) { }
   getCategoriesFromService():void{
     this.categoriesService.getCategories().subscribe(
@@ -89,6 +91,7 @@ export class EditNewComponent implements OnInit {
     newUpdate.append('shortDescription',this.new?.shortDescription!)
     newUpdate.append('content',this.new?.content!)
     newUpdate.append('categoryCode',this.new?.categoryCode!)
+    newUpdate.append('status', this.new?.status!.toString())
     newUpdate.append("imageFile", this.selectedFile);
     this.newsService.updateNewTest(newUpdate,this.new?.id!).subscribe(() => this.goBack());
   }

@@ -1,10 +1,68 @@
-.edittitle{
-    width: 5%;
+.edittitle {
+	width: 5%;
 }
-.editcont{
-    width: 100%;
+.editcont {
+	width: 95%;
 }
-.previewimg{
-    max-width: 400px;
-    max-height: 400px;
+.previewimg {
+	max-width: 400px;
+	max-height: 400px;
+}
+#content {
+	color: #197ff1;
+}
+#sidebar {
+	background-color: #197ff1 !important;
+	width: 7%;
+	max-width: 7% !important;
+}
+.add_new_title {
+	border: 3px solid #197ff1;
+	border-radius: 2%;
+}
+::-webkit-input-placeholder {
+	text-align: right;
+}
+input[type='file'] {
+	display: none;
+}
+.addImage {
+	/* border: 1px solid #197ff1; */
+	background-color: #00ff1a;
+	color: white;
+	margin: 0;
+	margin-left: 1vw;
+	width: 10%;
+	height: 100%;
+	vertical-align: middle;
+	border-radius: 10%;
+	align-items: center;
+	text-align: center;
+}
+.Add_file {
+	vertical-align: middle;
+	margin: auto;
+}
+.input_table {
+	width: 100%;
+	margin: 3vh 2vw;
+}
+.input_table tr td {
+	padding-bottom: 2vh;
+	height: 6vh;
+}
+.input_table tr td .editcont {
+	height: 100%;
+}
+.edit_btn {
+	float: right;
+	color: white;
+	text-align: center;
+	width: 10vw;
+}
+.file_btn {
+	float: right;
+	color: white;
+	text-align: center;
+	width: 100%;
 }

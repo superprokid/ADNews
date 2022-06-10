@@ -1,3 +1,10 @@
-.navbar{
-    width: 100% !important;
+.navbar {
+	width: 100% !important;
+	background-color: #197ff1 !important;
+}
+#navbar {
+	background-color: #197ff1 !important;
+}
+mdb-navbar nav {
+	box-shadow: none !important;
 }

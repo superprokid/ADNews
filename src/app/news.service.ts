@@ -8,15 +8,23 @@ import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { HttpParams } from '@angular/common/http';
 
 const httpOptions = {
-  headers: new HttpHeaders({"Content-Type": "application/json"})
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    "Authorization": 'Bearer ' + sessionStorage.getItem("token")
+  })
+}
+const httpAuthorizer = {
+  headers: new HttpHeaders({
+    "Authorization": 'Bearer ' + sessionStorage.getItem("token")
+  })
 }
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
-  private URL="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/news";
-  private URLdetail="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/new";
-  private URLcategory="http://springbootnews-env.eba-sexadeey.ap-southeast-1.elasticbeanstalk.com/category";
+  private URL="http://localhost:8081/news";
+  private URLdetail="http://localhost:8081/new";
+  private URLcategory="http://localhost:8081/category";
   private data?:string
   getNews(): Observable<News[]>{
     // return of(FakeNews);
@@ -40,7 +48,10 @@ export class NewsService {
     );
   }
   updateNewTest(newupdate:FormData,idnewupdate:number): Observable<any>{
-    return this.http.put(`${this.URLdetail}/${idnewupdate}`,newupdate).pipe()
+    return this.http.put(`${this.URLdetail}/${idnewupdate}`,newupdate,httpAuthorizer).pipe()
+  }
+  updateStatus(body: any) {
+    return this.http.put(`${this.URLdetail}`,body,httpAuthorizer).pipe()
   }
   addNews(newadd: News):Observable<News>{
     return this.http.post<News>(this.URLdetail,newadd,httpOptions).pipe(
@@ -49,7 +60,7 @@ export class NewsService {
     )
   }
   addNewsTest(newadd: FormData):Observable<FormData>{
-    return this.http.post<FormData>(this.URLdetail,newadd).pipe()
+    return this.http.post<FormData>(this.URLdetail,newadd,httpAuthorizer).pipe()
   }
   deleteNews(deleteid: number): Observable<News | null>{
     const deleteURL= `${this.URLdetail}/${deleteid}`;

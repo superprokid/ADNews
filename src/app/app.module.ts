@@ -19,6 +19,7 @@ import { EditNewComponent } from './edit-new/edit-new.component';
 import { NewsService } from './news.service';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
 import { CategoriesService } from './categories.service';
+import { APIService } from './signin.service';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { AddNewComponent } from './add-new/add-new.component';
 import { LineBreakPipe } from './line-break.pipe';
@@ -55,6 +56,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
   providers: [
     NewsService,
     CategoriesService,
+    APIService,
   ],
   bootstrap: [AppComponent]
 })
