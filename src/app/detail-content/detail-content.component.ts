@@ -38,13 +38,15 @@ export class DetailContentComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.getRandomNews();
-    this.getNewsFromRoute();
+    
     this.getCategoriesFromService();
+    this.getNewsFromRoute();
   }
   getNewsFromRoute(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
     this.newsService.getNewsWithID(id).subscribe(News => {
-      if (News?.status == 0) {
+      let isExits = this.search(News?.categoryCode, this.categorieslist)
+      if (News?.status == 0 || !isExits) {
         this.location.back()
       }
       this.new = News
@@ -128,6 +130,14 @@ export class DetailContentComponent implements OnInit {
     )
 
   }
+  search(nameKey:any, myArray: Categories[]){
+    for (var i = 0; i < myArray.length; i++) {
+        if (myArray[i].code === nameKey) {
+            return true
+        }
+    }
+    return false
+}
   redirectCate(id:number | undefined):void{
     this.router.navigate([`/news-category/${id}`]);
   }

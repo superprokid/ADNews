@@ -42,6 +42,12 @@ export class HeaderComponent implements OnInit {
   getCategoriesFromService():void{
     this.categoriesService.getCategories().subscribe(
       (updatedCategories) => {
+        for (let idx = 0; idx < updatedCategories.length; idx++){
+          if (updatedCategories[idx].status == 0) {
+            updatedCategories.splice(idx, 1)
+            idx--
+          }
+        }
         this.categorieslist = updatedCategories;
         console.log(`this.newlist = ${JSON.stringify(this.categorieslist)}`);
       }

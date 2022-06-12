@@ -99,11 +99,12 @@ export class SearchResultComponent implements OnInit {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
     this.router.navigate([`/news-category/${id}`]));
   }
-  getNewsFromService():void{
+  getNewsFromService(): void{
     this.newsService.getNewWithSearch(this.data).subscribe(
       (updatedNews) => {
         for (let idx = 0; idx < updatedNews.length; idx++){
-          if (updatedNews[idx].status == 0) {
+          let isExits = this.search(updatedNews[idx].categoryCode, this.categorieslist)
+          if (updatedNews[idx].status == 0 || !isExits) {
             updatedNews.splice(idx, 1)
             idx--
           }
@@ -118,6 +119,14 @@ export class SearchResultComponent implements OnInit {
       }
     )
   }
+  search(nameKey:any, myArray: Categories[]){
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].code === nameKey) {
+            return true
+        }
+    }
+    return false
+}
   codeToName():void{
     for(let i=0;i<this.newslist.length;i++){
       for(let j=0;j<this.categorieslist.length;j++){

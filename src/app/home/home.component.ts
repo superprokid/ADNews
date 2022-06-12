@@ -33,7 +33,9 @@ export class HomeComponent implements OnInit {
     this.newsService.getNews().subscribe(
       (updatedNews) => {
         for (let idx = 0; idx < updatedNews.length; idx++){
-          if (updatedNews[idx].status == 0) {
+          let isExits = this.search(updatedNews[idx].categoryCode, this.categorieslist)
+          console.log("exits:",isExits)
+          if (updatedNews[idx].status == 0 || !isExits) {
             updatedNews.splice(idx, 1)
             idx--
           }
@@ -48,6 +50,14 @@ export class HomeComponent implements OnInit {
       }
     )
   }
+  search(nameKey:any, myArray: Categories[]){
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].code === nameKey) {
+            return true
+        }
+    }
+    return false
+}
   getCategoriesFromService():void{
     this.categoriesService.getCategories().subscribe(
       (updatedCategories) => {

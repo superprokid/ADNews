@@ -9,7 +9,7 @@ import { News } from 'src/models/news';
 import { NewsService } from '../news.service';
 import { each } from 'jquery';
 import { isNull } from '@angular/compiler/src/output/output_ast';
-
+import {Location} from '@angular/common'
 import { Categories } from 'src/models/categories';
 import { CategoriesService } from '../categories.service';
 
@@ -33,7 +33,8 @@ export class AdminComponent implements OnInit {
   base64Data: any
   searchValue = ''
   selectedCate = ''
-  constructor(private modalService:NgbModal,
+  constructor(private modalService: NgbModal,
+    private location: Location,
     private newsService:NewsService,
     private categoriesService:CategoriesService,
     private router:Router) {
@@ -42,7 +43,7 @@ export class AdminComponent implements OnInit {
   getNewsFromService():void{
     this.newsService.getNews().subscribe(
       (updatedNews) => {
-        this.newlist = updatedNews;
+        this.newlist = updatedNews.reverse();
         for(let i=0;i<this.newlist.length;i++){
           this.base64Data = this.newlist[i].thumbnail
           this.newlist[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
@@ -194,7 +195,7 @@ export class AdminComponent implements OnInit {
     else if(this.searchValue == '' && this.selectedCate !=''){
       this.newsService.getNewWithCategory(parseInt(this.selectedCate)).subscribe(
         (updatedNews) => {
-          this.newlist = updatedNews;
+          this.newlist = updatedNews.reverse();
           for(let i=0;i<this.newlist.length;i++){
             this.base64Data = this.newlist[i].thumbnail
             this.newlist[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
@@ -205,7 +206,7 @@ export class AdminComponent implements OnInit {
     else if (this.searchValue != '' && this.selectedCate == '') {
       this.newsService.getNewWithSearch(this.searchValue).subscribe(
         (updatedNews) => {
-          this.newlist = updatedNews
+          this.newlist = updatedNews.reverse()
           for(let i=0;i<this.newlist.length;i++){
             this.base64Data = this.newlist[i].thumbnail
             this.newlist[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
