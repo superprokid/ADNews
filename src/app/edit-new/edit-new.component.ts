@@ -87,7 +87,8 @@ export class EditNewComponent implements OnInit {
     }
     // this.newsService.updateNew(this.new!).subscribe(() => this.goBack());
     let newUpdate = new FormData();
-    newUpdate.append('title',this.new?.title!)
+    newUpdate.append('title', this.new?.title!)
+    newUpdate.append('author',this.new?.author!)
     newUpdate.append('shortDescription',this.new?.shortDescription!)
     newUpdate.append('content',this.new?.content!)
     newUpdate.append('categoryCode',this.new?.categoryCode!)

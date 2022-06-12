@@ -90,6 +90,7 @@
 						<td class="edittitle"><b>Tên tác giả:</b></td>
 						<td>
 							<input
+								#newauthor
 								placeholder="--Nhập Tên Tác Giả--"
 								class="editcont"
 							/>
@@ -209,6 +210,7 @@
 				(click)="
 					add(
 						newtitle.value,
+						newauthor.value,
 						newcontent.value,
 						newshortDescription.value
 					)

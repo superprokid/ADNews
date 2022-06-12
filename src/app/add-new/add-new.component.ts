@@ -56,13 +56,14 @@ export class AddNewComponent implements OnInit {
       this.preview = event.target!.result;
     }
   }
-  add(title:string,content:string,shortDescription:string){
+  add(title:string,author:string,content:string,shortDescription:string){
     title = title.trim();
+    author = author.trim()
     content = content.trim();
     shortDescription = shortDescription.trim();
     let categoryCode = this.cate_code;
 
-    if(!title || !content || !shortDescription || !categoryCode){
+    if(!title || !author || !content || !shortDescription || !categoryCode){
       alert("Không được để trống");
       return;
     }
@@ -85,7 +86,8 @@ export class AddNewComponent implements OnInit {
       // addNews.thumbnail ="";
       // this.newsService.addNews(addNews).subscribe();
       let newAdd = new FormData();
-      newAdd.append('title',title)
+      newAdd.append('title', title)
+      newAdd.append('author',author)
       newAdd.append('shortDescription',shortDescription)
       newAdd.append('content',content)
       newAdd.append('categoryCode',categoryCode)
