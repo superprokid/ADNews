@@ -32,13 +32,18 @@ export class HomeComponent implements OnInit {
   getNewsFromService():void{
     this.newsService.getNews().subscribe(
       (updatedNews) => {
+        for (let idx = 0; idx < updatedNews.length; idx++){
+          if (updatedNews[idx].status == 0) {
+            updatedNews.splice(idx, 1)
+            idx--
+          }
+        }
         this.newslist = updatedNews.reverse();
         this.codeToName();
         for(let i=0;i<this.newslist.length;i++){
           this.base64Data = this.newslist[i].thumbnail
           this.newslist[i].thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
         }
-        console.log(`this.categorieslist = ${JSON.stringify(this.newslist)}`);
         this.showLoading=false
       }
     )
@@ -46,6 +51,12 @@ export class HomeComponent implements OnInit {
   getCategoriesFromService():void{
     this.categoriesService.getCategories().subscribe(
       (updatedCategories) => {
+        for (let idx = 0; idx < updatedCategories.length; idx++){
+          if (updatedCategories[idx].status == 0) {
+            updatedCategories.splice(idx, 1)
+            idx--
+          }
+        }
         this.categorieslist = updatedCategories;
         console.log(`this.newlist = ${JSON.stringify(this.categorieslist)}`);
       }

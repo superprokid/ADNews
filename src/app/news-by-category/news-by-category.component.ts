@@ -39,6 +39,12 @@ export class NewsByCategoryComponent implements OnInit {
   getCategoriesFromService(): void {
     this.categoriesService.getCategories().subscribe(
       (updatedCategories) => {
+        for (let idx = 0; idx < updatedCategories.length; idx++){
+          if (updatedCategories[idx].status == 0) {
+            updatedCategories.splice(idx, 1)
+            idx--
+          }
+        }
         this.categorieslist = updatedCategories;
         this.randomCate1 = this.categorieslist[Math.floor(Math.random() * this.categorieslist.length)]
         this.numberid = this.randomCate1.id
@@ -56,6 +62,12 @@ export class NewsByCategoryComponent implements OnInit {
   getNewWithCategory1(id: number): void {
     this.newsService.getNewWithCategory(id).subscribe(
       (updatedNews) => {
+        for (let idx = 0; idx < updatedNews.length; idx++){
+          if (updatedNews[idx].status == 0) {
+            updatedNews.splice(idx, 1)
+            idx--
+          }
+        }
         this.newssidelist1 = updatedNews.reverse();
         for(let i=0;i<this.newssidelist1.length;i++){
           this.base64Data = this.newssidelist1[i].thumbnail
@@ -68,6 +80,12 @@ export class NewsByCategoryComponent implements OnInit {
   getNewWithCategory2(id: number): void {
     this.newsService.getNewWithCategory(this.randomCate2?.id!).subscribe(
       (updatedNews) => {
+        for (let idx = 0; idx < updatedNews.length; idx++){
+          if (updatedNews[idx].status == 0) {
+            updatedNews.splice(idx, 1)
+            idx--
+          }
+        }
         this.newssidelist2 = updatedNews.reverse();
         for(let i=0;i<this.newssidelist2.length;i++){
           this.base64Data = this.newssidelist2[i].thumbnail
@@ -82,6 +100,12 @@ export class NewsByCategoryComponent implements OnInit {
     console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.route.snapshot.paramMap)}`);
     this.newsService.getNewWithCategory(id).subscribe(
       (newslist) => {
+        for (let idx = 0; idx < newslist.length; idx++){
+          if (newslist[idx].status == 0) {
+            newslist.splice(idx, 1)
+            idx--
+          }
+        }
         this.newlist = newslist;
         this.codeToName();
         for(let i=0;i<this.newlist.length;i++){

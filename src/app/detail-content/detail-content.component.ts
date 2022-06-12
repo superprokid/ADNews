@@ -8,6 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Categories } from 'src/models/categories';
 import { CategoriesService } from '../categories.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detail-content',
@@ -28,6 +29,7 @@ export class DetailContentComponent implements OnInit {
   newssidelist2: News[] = []
   newsindetail: News[] = []
   constructor(
+    private location: Location,
     private route: ActivatedRoute,
     private newsService: NewsService,
     private categoriesService: CategoriesService,
@@ -42,6 +44,9 @@ export class DetailContentComponent implements OnInit {
   getNewsFromRoute(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
     this.newsService.getNewsWithID(id).subscribe(News => {
+      if (News?.status == 0) {
+        this.location.back()
+      }
       this.new = News
       this.base64Data = News?.thumbnail
       this.new?.thumbnail = 'data:image/jpeg;base64,' + this.base64Data;
@@ -50,6 +55,12 @@ export class DetailContentComponent implements OnInit {
   getCategoriesFromService(): void {
     this.categoriesService.getCategories().subscribe(
       (updatedCategories) => {
+        for (let idx = 0; idx < updatedCategories.length; idx++){
+          if (updatedCategories[idx].status == 0) {
+            updatedCategories.splice(idx, 1)
+            idx--
+          }
+        }
         this.categorieslist = updatedCategories;
         this.randomCate1 = this.categorieslist[Math.floor(Math.random() * this.categorieslist.length)]
         this.numberid = this.randomCate1.id
@@ -66,6 +77,12 @@ export class DetailContentComponent implements OnInit {
   getNewWithCategory1(id: number): void {
     this.newsService.getNewWithCategory(id).subscribe(
       (updatedNews) => {
+        for (let idx = 0; idx < updatedNews.length; idx++){
+          if (updatedNews[idx].status == 0) {
+            updatedNews.splice(idx, 1)
+            idx--
+          }
+        }
         this.newssidelist1 = updatedNews.reverse();
         for(let i=0;i<this.newssidelist1.length;i++){
           this.base64Data = this.newssidelist1[i].thumbnail
@@ -77,6 +94,12 @@ export class DetailContentComponent implements OnInit {
   getNewWithCategory2(id: number): void {
     this.newsService.getNewWithCategory(this.randomCate2?.id!).subscribe(
       (updatedNews) => {
+        for (let idx = 0; idx < updatedNews.length; idx++){
+          if (updatedNews[idx].status == 0) {
+            updatedNews.splice(idx, 1)
+            idx--
+          }
+        }
         this.newssidelist2 = updatedNews.reverse();
         for(let i=0;i<this.newssidelist2.length;i++){
           this.base64Data = this.newssidelist2[i].thumbnail
